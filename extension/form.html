@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="ui.css" />
+</head>
+<body class="ui-shell">
+  <div class="ui-backdrop">
+    <div class="ui-orb ui-orb--gold ui-orb--large"></div>
+    <div class="ui-orb ui-orb--blue ui-orb--large"></div>
+    <div class="ui-grid"></div>
+  </div>
+
+  <main class="glass-panel form-panel">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">IPL 2026 Match Engine</p>
+        <h1 class="brand-title brand-title--large">Troth AI</h1>
+        <p class="hero-copy">
+          Sport-led forecasting for explosive IPL windows, styled with floodlight glass, player energy, and real match pressure.
+        </p>
+      </div>
+      <div class="hero-badge">Manual Scenario</div>
+    </header>
+
+    <section class="hero-showcase">
+      <div class="showcase-copy">
+        <p class="showcase-kicker">Season Spotlight</p>
+        <h2 class="showcase-title">Predict the next over like a dugout analyst.</h2>
+        <p class="showcase-text">
+          Built for high-voltage batting phases, bowling matchups, and six-over windows that swing the whole night.
+        </p>
+        <div class="showcase-ticker">
+          <div class="ticker-track">
+            <span>Virat Kohli</span>
+            <span>KL Rahul</span>
+            <span>MS Dhoni</span>
+            <span>Powerplay Pressure</span>
+            <span>Death Overs</span>
+            <span>Venue Trends</span>
+            <span>Virat Kohli</span>
+            <span>KL Rahul</span>
+            <span>MS Dhoni</span>
+            <span>Powerplay Pressure</span>
+            <span>Death Overs</span>
+            <span>Venue Trends</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="player-wall">
+        <article class="player-tile player-tile--feature">
+          <img src="https://source.unsplash.com/featured/800x1000/?virat%20kohli,cricket" alt="Virat Kohli inspired cricket artwork" referrerpolicy="no-referrer" />
+          <div class="player-overlay">
+            <p class="player-role">Anchor</p>
+            <h3>Virat Kohli</h3>
+          </div>
+        </article>
+        <article class="player-tile">
+          <img src="https://source.unsplash.com/featured/700x900/?KL%20Rahul,cricket" alt="KL Rahul inspired cricket artwork" referrerpolicy="no-referrer" />
+          <div class="player-overlay">
+            <p class="player-role">Tempo</p>
+            <h3>KL Rahul</h3>
+          </div>
+        </article>
+        <article class="player-tile">
+          <img src="https://source.unsplash.com/featured/700x900/?MS%20Dhoni,cricket" alt="MS Dhoni inspired cricket artwork" referrerpolicy="no-referrer" />
+          <div class="player-overlay">
+            <p class="player-role">Finisher</p>
+            <h3>MS Dhoni</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel-grid">
+      <div class="glass-card section-card">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Players</p>
+            <h2 class="section-title">Bat vs Ball</h2>
+          </div>
+          <div class="section-icon"></div>
+        </div>
+
+        <div class="field-stack">
+          <input id="striker" placeholder="Striker" class="glass-input" />
+          <input id="non_striker" placeholder="Non-striker" class="glass-input" />
+          <input id="bowler" placeholder="Bowler" class="glass-input" />
+        </div>
+      </div>
+
+      <div class="glass-card section-card">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Match State</p>
+            <h2 class="section-title">Current Frame</h2>
+          </div>
+          <div class="section-icon"></div>
+        </div>
+
+        <div class="field-stack">
+          <input id="score" placeholder="Score (e.g. 45)" class="glass-input" />
+          <input id="wickets" placeholder="Wickets (e.g. 2)" class="glass-input" />
+
+          <div class="field-row">
+            <input id="over" placeholder="Over (e.g. 5)" class="glass-input" />
+            <input id="balls" placeholder="Balls (0-5)" class="glass-input" />
+          </div>
+
+          <input id="venue" placeholder="Venue (e.g. Chinnaswamy)" class="glass-input" />
+        </div>
+      </div>
+
+      <div class="glass-card section-card">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Match Target</p>
+            <h2 class="section-title">Chase Context</h2>
+          </div>
+          <div class="section-icon"></div>
+        </div>
+
+        <div class="field-stack">
+          <label class="toggle-row" for="is_chasing">
+            <span>
+              <span class="toggle-title">Team is chasing</span>
+              <span class="toggle-caption">Turn this on only for second-innings chase scenarios.</span>
+            </span>
+            <input id="is_chasing" type="checkbox" class="toggle-input" />
+          </label>
+          <input id="target_total" placeholder="Target total (e.g. 186)" class="glass-input" />
+          <input id="total_overs" placeholder="Total overs (default 20)" class="glass-input" />
+        </div>
+      </div>
+
+      <div class="glass-card section-card">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Prediction Bet</p>
+            <h2 class="section-title">Next Phase</h2>
+          </div>
+          <div class="section-icon"></div>
+        </div>
+
+        <div class="field-stack">
+          <input id="target_runs" placeholder="Runs to predict (e.g. 60)" class="glass-input" />
+          <input id="overs" placeholder="Overs to predict (e.g. 6)" class="glass-input" />
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-card submit-card">
+      <button id="submit" class="submit-button">Predict</button>
+    </section>
+
+    <section id="loader" class="glass-card loader-card hidden">
+      <div class="spinner spinner--large"></div>
+      <p class="loader-title loader-title--large">Analyzing Match</p>
+      <p class="loader-caption">BUILDING THE PROJECTION</p>
+    </section>
+
+    <section id="resultBox" class="glass-card result-card hidden">
+        <div class="result-grid">
+          <div class="metric-card metric-card--large">
+            <p class="section-label">Outcome</p>
+            <p id="prediction" class="result-title result-title--large"></p>
+            <p id="prob" class="result-subtitle result-subtitle--spaced"></p>
+          </div>
+
+          <div class="metric-card metric-card--analysis metric-card--evidence">
+            <p class="section-label">Historical Evidence</p>
+            <p id="evidence" class="analysis-text analysis-text--large"></p>
+          </div>
+
+          <div class="metric-card metric-card--analysis metric-card--wide">
+            <p class="section-label">Analysis</p>
+            <p id="analysis" class="analysis-text analysis-text--large"></p>
+          </div>
+        </div>
+      </section>
+  </main>
+
+  <script src="form.js"></script>
+</body>
+</html>

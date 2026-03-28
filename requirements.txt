@@ -1,0 +1,14 @@
+flask
+torch
+pandas
+numpy
+joblib
+langchain
+langchain-core
+langchain-community
+langchain-groq
+duckduckgo-search
+sentence-transformers
+faiss-cpu
+requests
+beautifulsoup4

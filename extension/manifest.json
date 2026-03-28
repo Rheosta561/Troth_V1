@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "TROTH Cricket AI",
+  "version": "2.0",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "https://site.web.api.espn.com/*",
+    "http://127.0.0.1:5000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+  {
+    "resources": ["output.css"],
+    "matches": ["<all_urls>"]
+  }
+]
+}

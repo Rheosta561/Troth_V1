@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="ui.css" />
+</head>
+<body class="ui-shell ui-shell--popup">
+  <div class="ui-backdrop">
+    <div class="ui-orb ui-orb--gold"></div>
+    <div class="ui-orb ui-orb--blue"></div>
+    <div class="ui-grid"></div>
+  </div>
+
+  <main class="glass-panel popup-panel">
+    <header class="hero hero--compact">
+      <div>
+        <p class="eyebrow">IPL 2026 Match Intelligence</p>
+        <h1 class="brand-title">Troth AI</h1>
+      </div>
+      <div class="hero-badge">IPL</div>
+    </header>
+
+    <section class="popup-banner">
+      <div class="popup-banner__copy">
+        <p class="showcase-kicker">Game Night</p>
+        <h2 class="popup-banner__title">Live reads. Fast windows. Cleaner calls.</h2>
+      </div>
+      <div class="popup-banner__players">
+        <img src="https://source.unsplash.com/featured/320x420/?virat%20kohli,cricket" alt="Virat Kohli inspired artwork" referrerpolicy="no-referrer" />
+        <img src="https://source.unsplash.com/featured/320x420/?MS%20Dhoni,cricket" alt="MS Dhoni inspired artwork" referrerpolicy="no-referrer" />
+      </div>
+    </section>
+
+    <section class="glass-card action-card">
+      <p class="section-label">Quick Actions</p>
+
+      <button id="liveBtn" class="action-button action-button--primary">
+        <span class="action-title">Fetch Live Match</span>
+        <span class="action-subtitle">Pull current innings context</span>
+      </button>
+
+      <button id="manualBtn" class="action-button action-button--secondary">
+        <span class="action-title">Manual Studio</span>
+        <span class="action-subtitle">Enter a custom scenario</span>
+      </button>
+    </section>
+
+    <div id="status" class="status-text"></div>
+
+    <div id="loader" class="glass-card loader-card hidden">
+      <div class="spinner"></div>
+      <p class="loader-title">Analyzing...</p>
+      <p class="loader-caption">SHAPING THE NEXT OVER</p>
+    </div>
+
+    <section id="resultBox" class="glass-card result-card hidden">
+      <div class="metric-card">
+        <p class="section-label">Prediction</p>
+        <p id="prediction" class="result-title"></p>
+        <p id="prob" class="result-subtitle"></p>
+      </div>
+
+      <div class="analysis-block">
+        <p class="section-label">Historical Evidence</p>
+        <p id="evidence" class="analysis-text"></p>
+      </div>
+
+      <div class="analysis-block">
+        <p class="section-label">Analysis</p>
+        <p id="analysis" class="analysis-text"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

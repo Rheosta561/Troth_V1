@@ -1,0 +1,61 @@
+batsman,bowler,runs_batsman,balls,is_wicket,strike_rate
+AK Markram,Mohammed Siraj,1,3,0,33.33333333333333
+AK Markram,Swapnil Singh,4,2,1,200.0
+AK Markram,WG Jacks,1,1,0,100.0
+AK Markram,Yash Dayal,1,2,0,50.0
+Abdul Samad,KV Sharma,2,3,1,66.66666666666666
+Abdul Samad,LH Ferguson,8,3,0,266.66666666666663
+Abhishek Sharma,Mohammed Siraj,6,4,0,150.0
+Abhishek Sharma,WG Jacks,21,8,0,262.5
+Abhishek Sharma,Yash Dayal,4,3,1,133.33333333333331
+B Kumar,C Green,9,8,1,112.5
+B Kumar,KV Sharma,4,6,0,66.66666666666666
+C Green,JD Unadkat,11,8,0,137.5
+C Green,PJ Cummins,19,7,0,271.42857142857144
+C Green,Shahbaz Ahmed,2,2,0,100.0
+C Green,T Natarajan,5,5,0,100.0
+F du Plessis,Abhishek Sharma,2,2,0,100.0
+F du Plessis,B Kumar,13,4,0,325.0
+F du Plessis,PJ Cummins,10,3,0,333.33333333333337
+F du Plessis,T Natarajan,0,3,1,0.0
+H Klaasen,Swapnil Singh,7,3,1,233.33333333333334
+JD Unadkat,C Green,0,1,0,0.0
+JD Unadkat,LH Ferguson,6,2,0,300.0
+JD Unadkat,Mohammed Siraj,1,7,0,14.285714285714285
+JD Unadkat,Yash Dayal,1,1,0,100.0
+KD Karthik,JD Unadkat,1,1,0,100.0
+KD Karthik,PJ Cummins,4,3,1,133.33333333333331
+KD Karthik,T Natarajan,6,3,0,200.0
+MK Lomror,JD Unadkat,2,3,1,66.66666666666666
+MK Lomror,PJ Cummins,5,2,0,250.0
+Nithish Kumar Reddy,KV Sharma,0,3,1,0.0
+Nithish Kumar Reddy,Mohammed Siraj,3,4,0,75.0
+Nithish Kumar Reddy,Swapnil Singh,10,5,0,200.0
+Nithish Kumar Reddy,Yash Dayal,0,2,0,0.0
+PJ Cummins,C Green,0,2,1,0.0
+PJ Cummins,KV Sharma,16,7,0,228.57142857142856
+PJ Cummins,Swapnil Singh,13,3,0,433.3333333333333
+PJ Cummins,Yash Dayal,2,4,0,50.0
+RM Patidar,JD Unadkat,7,5,1,140.0
+RM Patidar,M Markande,34,10,0,340.0
+RM Patidar,PJ Cummins,3,3,0,100.0
+RM Patidar,Shahbaz Ahmed,6,3,0,200.0
+Shahbaz Ahmed,C Green,2,2,0,100.0
+Shahbaz Ahmed,KV Sharma,5,7,0,71.42857142857143
+Shahbaz Ahmed,LH Ferguson,14,7,0,200.0
+Shahbaz Ahmed,Mohammed Siraj,7,8,0,87.5
+Shahbaz Ahmed,Swapnil Singh,5,6,0,83.33333333333334
+Shahbaz Ahmed,Yash Dayal,7,9,0,77.77777777777779
+Swapnil Singh,PJ Cummins,1,1,0,100.0
+Swapnil Singh,T Natarajan,11,5,1,220.00000000000003
+TM Head,WG Jacks,1,3,1,33.33333333333333
+V Kohli,Abhishek Sharma,8,4,0,200.0
+V Kohli,B Kumar,1,2,0,50.0
+V Kohli,JD Unadkat,7,9,1,77.77777777777779
+V Kohli,M Markande,5,6,0,83.33333333333334
+V Kohli,PJ Cummins,12,6,0,200.0
+V Kohli,Shahbaz Ahmed,5,10,0,50.0
+V Kohli,T Natarajan,13,6,0,216.66666666666666
+WG Jacks,M Markande,2,3,1,66.66666666666666
+WG Jacks,Shahbaz Ahmed,1,3,0,33.33333333333333
+WG Jacks,T Natarajan,3,3,0,100.0
