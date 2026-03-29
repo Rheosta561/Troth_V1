@@ -4,7 +4,8 @@ from langchain_core.tools import tool
 from langchain.agents import create_agent
 from langchain_community.tools import DuckDuckGoSearchRun
 
-groq_api_key = os.getenv("GROQ_API_KEY")
+
+api_key = os.getenv("GROQ_API_KEY")
 if not groq_api_key:
     raise RuntimeError("GROQ_API_KEY is not configured")
 
