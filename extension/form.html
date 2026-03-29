@@ -85,9 +85,37 @@
         </div>
 
         <div class="field-stack">
-          <input id="striker" placeholder="Striker" class="glass-input" />
-          <input id="non_striker" placeholder="Non-striker" class="glass-input" />
-          <input id="bowler" placeholder="Bowler" class="glass-input" />
+          <div class="field-row">
+            <select id="batting_team" class="glass-input">
+              <option value="">Batting team</option>
+              <option value="CSK">CSK</option>
+              <option value="RR">RR</option>
+            </select>
+            <select id="bowling_team" class="glass-input">
+              <option value="">Fielding team</option>
+              <option value="CSK">CSK</option>
+              <option value="RR">RR</option>
+            </select>
+          </div>
+          <div class="team-guide">
+            <div class="team-guide__card">
+              <p class="team-guide__label">Batting Team Players</p>
+              <p id="batting_team_players" class="team-guide__players">Select a batting team to view likely players.</p>
+            </div>
+            <div class="team-guide__card">
+              <p class="team-guide__label">Fielding Team Players</p>
+              <p id="bowling_team_players" class="team-guide__players">Select a fielding team to view likely bowlers and players.</p>
+            </div>
+          </div>
+          <select id="striker" class="glass-input">
+            <option value="">Striker</option>
+          </select>
+          <select id="non_striker" class="glass-input">
+            <option value="">Non-striker</option>
+          </select>
+          <select id="bowler" class="glass-input">
+            <option value="">Bowler</option>
+          </select>
         </div>
       </div>
 
@@ -109,7 +137,22 @@
             <input id="balls" placeholder="Balls (0-5)" class="glass-input" />
           </div>
 
-          <input id="venue" placeholder="Venue (e.g. Chinnaswamy)" class="glass-input" />
+          <select id="venue" class="glass-input">
+            <option value="">Venue</option>
+            <option value="M. Chinnaswamy Stadium">M. Chinnaswamy Stadium</option>
+            <option value="Wankhede Stadium">Wankhede Stadium</option>
+            <option value="Barsapara Cricket Stadium">Barsapara Cricket Stadium</option>
+            <option value="Maharaja Yadavindra Singh International Cricket Stadium">Maharaja Yadavindra Singh International Cricket Stadium</option>
+            <option value="Ekana Cricket Stadium">Ekana Cricket Stadium</option>
+            <option value="Eden Gardens">Eden Gardens</option>
+            <option value="MA Chidambaram Stadium">MA Chidambaram Stadium</option>
+            <option value="Arun Jaitley Stadium">Arun Jaitley Stadium</option>
+            <option value="Narendra Modi Stadium">Narendra Modi Stadium</option>
+            <option value="HPCA Cricket Stadium">HPCA Cricket Stadium</option>
+            <option value="Sawai Mansingh Stadium">Sawai Mansingh Stadium</option>
+            <option value="Shaheed Veer Narayan Singh International Stadium">Shaheed Veer Narayan Singh International Stadium</option>
+            <option value="Rajiv Gandhi International Stadium">Rajiv Gandhi International Stadium</option>
+          </select>
         </div>
       </div>
 
@@ -145,14 +188,15 @@
         </div>
 
         <div class="field-stack">
-          <input id="target_runs" placeholder="Runs to predict (e.g. 60)" class="glass-input" />
-          <input id="overs" placeholder="Overs to predict (e.g. 6)" class="glass-input" />
+          <input id="overs" placeholder="Target end over (e.g. 8)" class="glass-input" />
+          <input id="target_runs" placeholder="Score target by end over (e.g. 102)" class="glass-input" />
         </div>
       </div>
     </section>
 
     <section class="glass-card submit-card">
       <button id="submit" class="submit-button">Predict</button>
+      <p id="backendStatus" class="backend-status">Checking backend connection...</p>
     </section>
 
     <section id="loader" class="glass-card loader-card hidden">

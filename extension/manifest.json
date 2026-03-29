@@ -1,11 +1,13 @@
 {
   "manifest_version": 3,
   "name": "TROTH Cricket AI",
-  "version": "2.0",
+  "version": "2.2",
   "permissions": ["activeTab", "scripting"],
   "host_permissions": [
     "https://site.web.api.espn.com/*",
-    "http://127.0.0.1:5000/*"
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "http://0.0.0.0/*"
   ],
   "action": {
     "default_popup": "popup.html"

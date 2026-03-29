@@ -1,6 +1,111 @@
 const loader = document.getElementById("loader");
 const resultBox = document.getElementById("resultBox");
-const PREDICT_URL = "http://127.0.0.1:5000/predict-live";
+const backendStatus = document.getElementById("backendStatus");
+const battingTeamInput = document.getElementById("batting_team");
+const bowlingTeamInput = document.getElementById("bowling_team");
+const battingTeamPlayers = document.getElementById("batting_team_players");
+const bowlingTeamPlayers = document.getElementById("bowling_team_players");
+const strikerInput = document.getElementById("striker");
+const nonStrikerInput = document.getElementById("non_striker");
+const bowlerInput = document.getElementById("bowler");
+const PREDICT_URL = "http://127.0.0.1:5055/predict-live";
+const HEALTH_URL = "http://127.0.0.1:5055/health";
+
+const TEAM_SQUADS = {
+  csk: {
+    batters: [
+      "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
+      "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel"
+    ],
+    allRounders: [
+      "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew William Short",
+      "Aman Khan", "Zak Foulkes", "Shivam Dube"
+    ],
+    bowlers: [
+      "Khaleel Ahmed", "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary",
+      "Shreyas Gopal", "Gurjapneet Singh", "Akeal Hosein", "Matt Henry",
+      "Rahul Chahar", "Spencer Johnson"
+    ]
+  },
+  "chennai super kings": {
+    batters: [
+      "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
+      "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel"
+    ],
+    allRounders: [
+      "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew William Short",
+      "Aman Khan", "Zak Foulkes", "Shivam Dube"
+    ],
+    bowlers: [
+      "Khaleel Ahmed", "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary",
+      "Shreyas Gopal", "Gurjapneet Singh", "Akeal Hosein", "Matt Henry",
+      "Rahul Chahar", "Spencer Johnson"
+    ]
+  },
+  rr: {
+    batters: [
+      "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorious",
+      "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal", "Dhruv Jurel"
+    ],
+    allRounders: [
+      "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja", "Dasun Shanaka"
+    ],
+    bowlers: [
+      "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka", "Ravi Bishnoi",
+      "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur", "Brijesh Sharma",
+      "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+    ]
+  },
+  "rajasthan royals": {
+    batters: [
+      "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorious",
+      "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal", "Dhruv Jurel"
+    ],
+    allRounders: [
+      "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja", "Dasun Shanaka"
+    ],
+    bowlers: [
+      "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka", "Ravi Bishnoi",
+      "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur", "Brijesh Sharma",
+      "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+    ]
+  }
+};
+
+const TEAM_PLAYERS = {
+  csk: [
+    "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
+    "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel",
+    "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew Short",
+    "Aman Khan", "Zak Foulkes", "Shivam Dube", "Khaleel Ahmed",
+    "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary", "Shreyas Gopal",
+    "Gurjapneet Singh", "Akeal Hosein", "Matt Henry", "Rahul Chahar", "Spencer Johnson"
+  ],
+  "chennai super kings": [
+    "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
+    "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel",
+    "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew Short",
+    "Aman Khan", "Zak Foulkes", "Shivam Dube", "Khaleel Ahmed",
+    "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary", "Shreyas Gopal",
+    "Gurjapneet Singh", "Akeal Hosein", "Matt Henry", "Rahul Chahar", "Spencer Johnson"
+  ],
+  rr: [
+    "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorius",
+    "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal",
+    "Dhruv Jurel", "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja",
+    "Dasun Shanaka", "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka",
+    "Ravi Bishnoi", "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur",
+    "Brijesh Sharma", "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+  ],
+  "rajasthan royals": [
+    "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorius",
+    "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal",
+    "Dhruv Jurel", "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja",
+    "Dasun Shanaka", "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka",
+    "Ravi Bishnoi", "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur",
+    "Brijesh Sharma", "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+  ]
+};
 
 async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
   const controller = new AbortController();
@@ -13,6 +118,47 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
   }
 }
 
+async function parseResponse(res) {
+  const text = await res.text();
+
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch (err) {
+    return {
+      status: "invalid_response",
+      message: text || "Backend returned a non-JSON response."
+    };
+  }
+}
+
+async function checkBackendHealth() {
+  if (!backendStatus) {
+    return false;
+  }
+
+  backendStatus.textContent = "Checking backend connection...";
+  backendStatus.className = "backend-status";
+
+  try {
+    const res = await fetchWithTimeout(HEALTH_URL, {}, 3000);
+    const json = await parseResponse(res);
+
+    if (!res.ok || json.status !== "ok") {
+      backendStatus.textContent = "Backend offline. Start Flask on port 5055.";
+      backendStatus.className = "backend-status backend-status--error";
+      return false;
+    }
+
+    backendStatus.textContent = "Backend connected on port 5055.";
+    backendStatus.className = "backend-status backend-status--ok";
+    return true;
+  } catch (err) {
+    backendStatus.textContent = "Backend offline. Start Flask on port 5055.";
+    backendStatus.className = "backend-status backend-status--error";
+    return false;
+  }
+}
+
 function showError(message) {
   resultBox.classList.remove("hidden");
   document.getElementById("prediction").innerText = "Unavailable";
@@ -21,15 +167,90 @@ function showError(message) {
   document.getElementById("analysis").innerText = message;
 }
 
-document.getElementById("submit").onclick = async () => {
+function normalizeTeamKey(value) {
+  return String(value || "").trim().toLowerCase();
+}
 
+function renderTeamPlayers() {
+  const battingKey = normalizeTeamKey(battingTeamInput?.value);
+  const bowlingKey = normalizeTeamKey(bowlingTeamInput?.value);
+  const battingList = TEAM_PLAYERS[battingKey] || [];
+  const bowlingList = TEAM_PLAYERS[bowlingKey] || [];
+
+  if (battingTeamPlayers) {
+    battingTeamPlayers.textContent = battingList.length
+      ? battingList.join(" • ")
+      : "No local player guide found for this team yet.";
+  }
+
+  if (bowlingTeamPlayers) {
+    bowlingTeamPlayers.textContent = bowlingList.length
+      ? bowlingList.join(" • ")
+      : "No local player guide found for this team yet.";
+  }
+}
+
+function setSelectOptions(selectEl, label, items) {
+  if (!selectEl) {
+    return;
+  }
+
+  const currentValue = selectEl.value;
+  selectEl.innerHTML = "";
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = label;
+  selectEl.appendChild(placeholder);
+
+  for (const item of items) {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    selectEl.appendChild(option);
+  }
+
+  if (items.includes(currentValue)) {
+    selectEl.value = currentValue;
+  }
+}
+
+function buildBattingOptions(teamKey) {
+  const squad = TEAM_SQUADS[teamKey];
+  if (!squad) {
+    return [];
+  }
+  return [...squad.batters, ...squad.allRounders];
+}
+
+function buildBowlingOptions(teamKey) {
+  const squad = TEAM_SQUADS[teamKey];
+  if (!squad) {
+    return [];
+  }
+  return [...squad.bowlers, ...squad.allRounders];
+}
+
+function renderPlayerDropdowns() {
+  const battingKey = normalizeTeamKey(battingTeamInput?.value);
+  const bowlingKey = normalizeTeamKey(bowlingTeamInput?.value);
+
+  setSelectOptions(strikerInput, "Striker", buildBattingOptions(battingKey));
+  setSelectOptions(nonStrikerInput, "Non-striker", buildBattingOptions(battingKey));
+  setSelectOptions(bowlerInput, "Bowler", buildBowlingOptions(bowlingKey));
+}
+
+document.getElementById("submit").onclick = async () => {
   loader.classList.remove("hidden");
   resultBox.classList.add("hidden");
 
   const payload = {
-    live: true,
+    live: false,
+    source: "manual",
     is_chasing: document.getElementById("is_chasing").checked,
 
+    batting_team: val("batting_team"),
+    bowling_team: val("bowling_team"),
     striker: val("striker"),
     non_striker: val("non_striker"),
     bowler: val("bowler"),
@@ -53,6 +274,24 @@ document.getElementById("submit").onclick = async () => {
     return;
   }
 
+  if (payload.overs <= payload.over || (payload.overs === payload.over && payload.balls > 0)) {
+    loader.classList.add("hidden");
+    showError("Target end over must be later than the current over position.");
+    return;
+  }
+
+  if (payload.total_overs > 0 && payload.overs > payload.total_overs) {
+    loader.classList.add("hidden");
+    showError("Target end over cannot be greater than the innings total overs.");
+    return;
+  }
+
+  if (payload.target_runs <= payload.score) {
+    loader.classList.add("hidden");
+    showError("Score target by end over must be greater than the current score.");
+    return;
+  }
+
   try {
     const res = await fetchWithTimeout(PREDICT_URL, {
       method: "POST",
@@ -62,14 +301,15 @@ document.getElementById("submit").onclick = async () => {
       body: JSON.stringify(payload)
     }, 12000);
 
+    const json = await parseResponse(res);
+
     if (!res.ok) {
-      throw new Error("Server error");
+      showError(json.message || `Prediction request failed (HTTP ${res.status}).`);
+      return;
     }
 
-    const json = await res.json();
-
     if (json.status === "no_live_match") {
-      showError("No live match data was available for prediction.");
+      showError(json.message || "No live match data was available for prediction.");
       return;
     }
 
@@ -93,20 +333,28 @@ document.getElementById("submit").onclick = async () => {
 
     document.getElementById("analysis").innerText =
       json.analysis || "Prediction completed, but no analysis text was returned.";
-
   } catch (err) {
     console.log(err);
-    showError("Could not reach the backend in time. Check that the Flask server is running on port 5000.");
+    showError("Could not reach the backend in time. Check that Flask is running on port 5055.");
   } finally {
     loader.classList.add("hidden");
+    checkBackendHealth();
   }
 };
 
-// helpers
 function val(id) {
-  return document.getElementById(id).value;
+  const el = document.getElementById(id);
+  return el ? el.value : "";
 }
 
 function num(id) {
-  return parseInt(val(id)) || 0;
+  return parseInt(val(id), 10) || 0;
 }
+
+checkBackendHealth();
+renderTeamPlayers();
+renderPlayerDropdowns();
+battingTeamInput?.addEventListener("input", renderTeamPlayers);
+bowlingTeamInput?.addEventListener("input", renderTeamPlayers);
+battingTeamInput?.addEventListener("input", renderPlayerDropdowns);
+bowlingTeamInput?.addEventListener("input", renderPlayerDropdowns);

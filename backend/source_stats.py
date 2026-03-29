@@ -55,6 +55,11 @@ def _run_with_timeout(fn, timeout_seconds, fallback):
             return fallback
 
 
+def _clean_snippet(text):
+    value = " ".join(str(text or "").split())
+    return value[:220]
+
+
 @lru_cache(maxsize=256)
 def fetch_batting_strike_rate_at_venue(player, venue):
     def lookup():
@@ -95,3 +100,56 @@ def fetch_bowler_economy_at_venue(bowler, venue):
         return {"value": None, "source": None}
 
     return _run_with_timeout(lookup, 2.5, {"value": None, "source": None})
+
+
+@lru_cache(maxsize=256)
+def fetch_search_context(striker, non_striker, bowler, venue, target_runs, predict_overs):
+    def lookup():
+        queries = [
+            (
+                f'"{striker}" "{venue}" IPL batting record strike rate',
+                f"{striker} at {venue}"
+            ),
+            (
+                f'"{non_striker}" "{venue}" IPL batting record strike rate',
+                f"{non_striker} at {venue}"
+            ),
+            (
+                f'"{striker}" "{bowler}" IPL record',
+                f"{striker} vs {bowler}"
+            ),
+            (
+                f'"{bowler}" "{venue}" IPL economy',
+                f"{bowler} at {venue}"
+            ),
+            (
+                f'"{venue}" IPL scoring pattern {int(target_runs)} runs {predict_overs} overs',
+                f"{venue} scoring trend"
+            ),
+        ]
+
+        evidence = []
+        with DDGS() as ddgs:
+            for query, label in queries:
+                try:
+                    results = list(ddgs.text(query, max_results=2))
+                except Exception:
+                    continue
+
+                for item in results:
+                    snippet = _clean_snippet(item.get("body") or item.get("snippet") or "")
+                    href = item.get("href") or item.get("url") or ""
+                    title = _clean_snippet(item.get("title") or label)
+                    if not snippet:
+                        continue
+                    evidence.append({
+                        "label": label,
+                        "title": title,
+                        "snippet": snippet,
+                        "source": href,
+                    })
+                    break
+
+        return evidence[:5]
+
+    return _run_with_timeout(lookup, 2.0, [])

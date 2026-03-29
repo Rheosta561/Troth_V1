@@ -3,11 +3,10 @@ from pathlib import Path
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 
-from commentary import compute_momentum
-from live_stats import fetch_live_match_context
 from utils import (
     build_historical_evidence,
     get_player_form,
@@ -16,32 +15,53 @@ from utils import (
     retrieve_similar_scenarios,
 )
 
-try:
-    from agent import agent
-except Exception:
-    agent = None
-
 app = Flask(__name__)
 BASE_DIR = Path(__file__).resolve().parent
+BACKEND_PORT = 5055
 
 
 scaler = joblib.load(BASE_DIR / "scaler.pkl")
+numeric_feature_count = len(scaler.mean_)
+state_dict = torch.load(BASE_DIR / "model.pth", map_location="cpu")
+checkpoint_player_count = state_dict["player_emb.weight"].shape[0]
+checkpoint_bowler_count = state_dict["bowler_emb.weight"].shape[0]
+
+
+def rebuild_training_maps():
+    df = pd.read_csv(BASE_DIR / "csk_rr_dynamic_dataset.csv")
+    df = df.replace([np.inf, -np.inf], np.nan).fillna(0)
+    df = df[(df["future_runs_6"] > 5) & (df["future_runs_6"] < 100)]
+    df["wickets_left"] = 10 - df["wickets"]
+    df["balls_done"] = df["over"] * 6 + df["ball"]
+    df["balls_left"] = 120 - df["balls_done"]
+    df = df[df["balls_left"] > 36]
+
+    players = list(dict.fromkeys(df["batsman"].tolist()))
+    bowlers = list(dict.fromkeys(df["bowler"].tolist()))
+    return (
+        {player: idx for idx, player in enumerate(players)},
+        {bowler: idx for idx, bowler in enumerate(bowlers)},
+    )
+
+
 player_map = joblib.load(BASE_DIR / "player_map.pkl")
 bowler_map = joblib.load(BASE_DIR / "bowler_map.pkl")
+if len(player_map) != checkpoint_player_count or len(bowler_map) != checkpoint_bowler_count:
+    player_map, bowler_map = rebuild_training_maps()
 
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self, n_numeric_features, n_players, n_bowlers):
         super().__init__()
 
-        self.player_emb = nn.Embedding(len(player_map), 16)
-        self.bowler_emb = nn.Embedding(len(bowler_map), 16)
+        self.player_emb = nn.Embedding(n_players, 16)
+        self.bowler_emb = nn.Embedding(n_bowlers, 16)
 
         self.net = nn.Sequential(
-            nn.Linear(12 + 32, 256),
+            nn.Linear(n_numeric_features + 32, 256),
             nn.ReLU(),
             nn.BatchNorm1d(256),
-            nn.Dropout(0.3),
+            nn.Dropout(0.4),
             nn.Linear(256, 128),
             nn.ReLU(),
             nn.Linear(128, 1)
@@ -54,9 +74,14 @@ class Model(nn.Module):
         return self.net(x)
 
 
-model = Model()
-model.load_state_dict(torch.load(BASE_DIR / "model.pth", map_location="cpu"))
+model = Model(numeric_feature_count, checkpoint_player_count, checkpoint_bowler_count)
+model.load_state_dict(state_dict)
 model.eval()
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"})
 
 
 def safe(data, key, default):
@@ -152,6 +177,7 @@ def build_deterministic_analysis(
     predicted_runs,
     similarity_summary,
     historical_evidence,
+    search_evidence_text,
 ):
     outcome_line = f"Model verdict: {prediction} ({prob * 100:.1f}%)."
     context_line = (
@@ -174,6 +200,7 @@ def build_deterministic_analysis(
     )
     blended_line = f"Blended projection is {predicted_runs:.1f} runs in this scoring window."
     evidence_block = f"Historical evidence: {historical_evidence}"
+    search_block = f"Searched venue/player context: {search_evidence_text}"
     similarity_block = f"Closest match-state summary: {similarity_summary}"
     final_line = f"Final answer: {prediction}"
 
@@ -185,9 +212,21 @@ def build_deterministic_analysis(
         forecast_line,
         blended_line,
         evidence_block,
+        search_block,
         similarity_block,
         final_line,
     ])
+
+
+def build_search_evidence_text(search_items):
+    if not search_items:
+        return "No additional DuckDuckGo venue/player evidence was available within the time limit."
+
+    lines = []
+    for item in search_items[:4]:
+        source = item.get("source") or "source unavailable"
+        lines.append(f"{item.get('label', 'Search result')}: {item.get('snippet', '')} ({source})")
+    return "\n".join(lines)
 
 
 def build_similarity_summary(similarity_result, target_runs, predict_overs):
@@ -250,7 +289,6 @@ def compute_context_adjustment(current_rr, target_runs, window_balls, striker_fo
 @app.route("/predict-live", methods=["POST"])
 def predict():
     data = request.json or {}
-    request_source = safe(data, "source", "live")
 
     score = safe(data, "score", 0)
     wickets = safe(data, "wickets", 0)
@@ -265,15 +303,30 @@ def predict():
     bowling_team = safe(data, "bowling_team", "Kolkata Knight Riders")
     venue = safe(data, "venue", "Unknown")
     target_total = safe(data, "target_total", 0)
-
-    live_context = fetch_live_match_context(batting_team, bowling_team)
-    require_live_validation = safe(data, "live", True) and request_source != "manual"
-    if require_live_validation and not live_context.get("live", False):
-        return jsonify({
-            "status": "no_live_match",
-            "message": f"No live match found for {batting_team} vs {bowling_team} on ESPN or Cricbuzz."
-        })
+    total_overs = max(safe(data, "total_overs", 20), 1)
+    is_chasing = bool(safe(data, "is_chasing", False))
+    live_context = {"espn": None, "cricbuzz": None, "live": False}
     balls_done = over * 6 + balls
+    current_over_position = over + balls / 6.0
+
+    if target_end_over <= current_over_position:
+        return jsonify({
+            "status": "invalid_input",
+            "message": "Target end over must be later than the current over position."
+        })
+
+    if target_end_over > total_overs:
+        return jsonify({
+            "status": "invalid_input",
+            "message": "Target end over cannot be greater than the innings total overs."
+        })
+
+    if target_runs <= score:
+        return jsonify({
+            "status": "invalid_input",
+            "message": "Score target by end over must be greater than the current score."
+        })
+
     runs_needed = max(target_runs - score, 0)
     target_window_balls = int(target_end_over * 6)
     window_balls = max(target_window_balls - balls_done, 0)
@@ -285,22 +338,21 @@ def predict():
     runs_last_6 = max(int(round(current_rr)), 0)
     runs_last_12 = max(int(round(current_rr * 2)), runs_last_6)
 
-    try:
-        live_runs_6, live_runs_12, detected = compute_momentum()
-        runs_last_6 = live_runs_6
-        runs_last_12 = live_runs_12
-        if detected != "unknown":
-            striker = detected
-    except Exception:
-        pass
-
     momentum = runs_last_6 + runs_last_12
     acceleration = runs_last_6 / (runs_last_12 + 1)
     wickets_left = 10 - wickets
+    balls_done = over * 6 + balls
+    balls_left = 120 - balls_done
     phase = 0 if over < 6 else (1 if over < 15 else 2)
     is_powerplay = over < 6
     run_rate_trend = runs_last_6 - runs_last_12 / 2
     wicket_pressure = wickets / (balls_done + 1)
+    is_death = 1 if over >= 16 else 0
+    death_progress = float(np.clip((over - 15) / 5, 0, 1))
+    balls_in_death = max(balls_done - 96, 0) if over >= 16 else 0
+    death_pressure = current_rr * death_progress
+    wickets_in_hand_ratio = wickets_left / 10.0
+    death_momentum = runs_last_6 if over >= 16 else 0
     required_rr_window = runs_needed / max(float(window_balls) / 6.0, 0.1) if window_balls > 0 else 0.0
     pressure_index = required_rr_window / max(current_rr, 0.1) if runs_needed > 0 else 0.0
 
@@ -317,10 +369,12 @@ def predict():
 
     features = np.array([[
         score, wickets, wickets_left,
-        balls_left_innings, phase,
+        balls_left, phase,
         runs_last_6, runs_last_12,
         momentum, acceleration, run_rate_trend,
-        current_rr, wicket_pressure
+        current_rr, wicket_pressure,
+        is_death, death_progress, balls_in_death,
+        death_pressure, wickets_in_hand_ratio, death_momentum
     ]])
 
     features = scaler.transform(features)
@@ -381,6 +435,7 @@ def predict():
     )
     historical_evidence = build_historical_evidence_text(evidence_items)
     similarity_summary = build_similarity_summary(similarity_result, runs_needed, max(window_overs, 0.1))
+    search_evidence_text = "DuckDuckGo venue/player search is disabled in the live pipeline to keep predictions stable."
 
     analysis = build_deterministic_analysis(
         prediction=prediction,
@@ -410,6 +465,7 @@ def predict():
         predicted_runs=predicted_runs,
         similarity_summary=similarity_summary,
         historical_evidence=historical_evidence,
+        search_evidence_text=search_evidence_text,
     )
 
     return jsonify({
@@ -431,9 +487,10 @@ def predict():
         "prediction": prediction,
         "probability": round(prob, 3),
         "historical_evidence": historical_evidence,
+        "searched_evidence": search_evidence_text,
         "analysis": analysis,
     })
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=BACKEND_PORT, debug=True)

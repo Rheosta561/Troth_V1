@@ -6,6 +6,7 @@ from langchain_community.tools import DuckDuckGoSearchRun
 
 
 api_key = os.getenv("GROQ_API_KEY")
+groq_api_key = api_key.strip() if api_key else None;
 if not groq_api_key:
     raise RuntimeError("GROQ_API_KEY is not configured")
 

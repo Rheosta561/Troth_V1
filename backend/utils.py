@@ -1,4 +1,6 @@
 from pathlib import Path
+from difflib import get_close_matches
+import re
 
 import numpy as np
 import pandas as pd
@@ -14,20 +16,211 @@ def _load_csv(filename):
     return pd.read_csv(path), True
 
 
-player_stats, HAS_PLAYER_STATS = _load_csv("mi_kkr_player_stats.csv")
-vs_stats, HAS_VS_STATS = _load_csv("mi_kkr_vs_stats.csv")
-main_df, HAS_MAIN_DF = _load_csv("mi_kkr_dynamic_dataset.csv")
+player_stats, HAS_PLAYER_STATS = _load_csv("csk_rr_player_stats.csv")
+vs_stats, HAS_VS_STATS = _load_csv("csk_rr_vs_stats.csv")
+main_df, HAS_MAIN_DF = _load_csv("csk_rr_dynamic_dataset.csv")
 
 
 def norm(x):
     return str(x).lower().strip()
 
 
+def normalize_person_key(name):
+    value = norm(name)
+    value = re.sub(r"[^a-z0-9\s]", " ", value)
+    value = re.sub(r"\s+", " ", value).strip()
+    value = value.replace("deshpandey", "deshpande")
+    value = value.replace("rickleton", "rickelton")
+    value = value.replace("mahatre", "mhatre")
+    return value
+
+
+VENUE_ALIASES = {
+    "arun jaitley delhi": "arun jaitley",
+    "arun jaitley stadium delhi": "arun jaitley",
+    "arun jaitley stadium": "arun jaitley",
+    "firoz shah kotla": "arun jaitley",
+    "firoz shah kotla delhi": "arun jaitley",
+    "kotla": "arun jaitley",
+    "wankhede mumbai": "wankhede",
+    "wankhede stadium mumbai": "wankhede",
+    "wankhede stadium": "wankhede",
+    "ma chidambaram chepauk chennai": "chepauk",
+    "ma chidambaram stadium chepauk chennai": "chepauk",
+    "chepauk": "chepauk",
+    "eden gardens kolkata": "eden gardens",
+    "m chinnaswamy stadium bengaluru": "chinnaswamy",
+    "m chinnaswamy stadium bangalore": "chinnaswamy",
+    "chinnaswamy": "chinnaswamy",
+    "sawai mansingh stadium jaipur": "sawai mansingh",
+    "rajiv gandhi international stadium uppal hyderabad": "uppal",
+}
+
+PLAYER_ALIASES = {
+    "dhoni": "MS Dhoni",
+    "ms dhoni": "MS Dhoni",
+    "m s dhoni": "MS Dhoni",
+    "mahendra singh dhoni": "MS Dhoni",
+    "ruturaj gaikwad": "RD Gaikwad",
+    "gaikwad": "RD Gaikwad",
+    "devon conway": "DP Conway",
+    "conway": "DP Conway",
+    "shivam dube": "S Dube",
+    "ravindra jadeja": "RA Jadeja",
+    "jadeja": "RA Jadeja",
+    "tushar deshpande": "TU Deshpande",
+    "tushar deshpandey": "TU Deshpande",
+    "deshpande": "TU Deshpande",
+    "khaleel ahmed": "KK Ahmed",
+    "khaleel": "KK Ahmed",
+    "anshul kamboj": "A Kamboj",
+    "kamboj": "A Kamboj",
+    "vaibhav suryavanshi": "V Suryavanshi",
+    "suryavanshi": "V Suryavanshi",
+    "ayush mhatre": "A Mhatre",
+    "ayush mahatre": "A Mhatre",
+    "mhatre": "A Mhatre",
+    "sanju samson": "SV Samson",
+    "samson": "SV Samson",
+    "riyan parag": "R Parag",
+    "parag": "R Parag",
+    "shimron hetmyer": "SO Hetmyer",
+    "hetmyer": "SO Hetmyer",
+    "yashasvi jaiswal": "YBK Jaiswal",
+    "jaiswal": "YBK Jaiswal",
+    "dhruv jurel": "Dhruv Jurel",
+    "jurel": "Dhruv Jurel",
+    "jofra archer": "JC Archer",
+    "archer": "JC Archer",
+    "kwena maphaka": "KT Maphaka",
+    "maphaka": "KT Maphaka",
+    "kuldeep sen": "KR Sen",
+    "nandre burger": "N Burger",
+    "burger": "N Burger",
+    "yudhvir singh charak": "Yudhvir Singh",
+    "yudhvir singh": "Yudhvir Singh",
+    "dewald brevis": "D Brevis",
+    "brevis": "D Brevis",
+    "noor ahmad": "Noor Ahmad",
+}
+
+
 def normalize_venue_name(venue):
     value = norm(venue)
     value = value.replace(",", " ")
+    value = re.sub(r"[^a-z0-9\s]", " ", value)
     tokens = [token for token in value.split() if token not in {"stadium", "cricket", "ground"}]
-    return " ".join(tokens)
+    cleaned = " ".join(tokens)
+    cleaned = cleaned.replace("jaitely", "jaitley")
+    return VENUE_ALIASES.get(cleaned, cleaned)
+
+
+def build_name_index(names):
+    index = {}
+    for raw_name in names:
+        raw_name = str(raw_name).strip()
+        if not raw_name:
+            continue
+        key = normalize_person_key(raw_name)
+        index.setdefault(key, raw_name)
+
+        parts = key.split()
+        if parts:
+            surname = parts[-1]
+            index.setdefault(surname, raw_name)
+            index.setdefault(" ".join(parts[-2:]), raw_name)
+            if len(parts) >= 2:
+                first_initial = parts[0][0]
+                index.setdefault(f"{first_initial} {surname}", raw_name)
+                index.setdefault(f"{first_initial}{surname}", raw_name)
+
+            compact = "".join(parts)
+            index.setdefault(compact, raw_name)
+
+    return index
+
+
+def score_name_match(query_key, candidate_key):
+    query_parts = query_key.split()
+    candidate_parts = candidate_key.split()
+    if not query_parts or not candidate_parts:
+        return 0.0
+
+    score = 0.0
+    if query_key == candidate_key:
+        score += 1.0
+
+    query_surname = query_parts[-1]
+    candidate_surname = candidate_parts[-1]
+    if query_surname == candidate_surname:
+        score += 0.75
+    elif query_surname in candidate_surname or candidate_surname in query_surname:
+        score += 0.45
+
+    if query_parts[0][0] == candidate_parts[0][0]:
+        score += 0.2
+
+    overlap = len(set(query_parts) & set(candidate_parts))
+    score += 0.18 * overlap
+
+    compact_query = "".join(query_parts)
+    compact_candidate = "".join(candidate_parts)
+    if compact_query == compact_candidate:
+        score += 0.5
+
+    close = get_close_matches(query_key, [candidate_key], n=1, cutoff=0.7)
+    if close:
+        score += 0.25
+
+    return score
+
+
+PLAYER_NAME_INDEX = build_name_index(player_stats["player"].tolist()) if HAS_PLAYER_STATS and not player_stats.empty else {}
+VS_BATSMAN_INDEX = build_name_index(vs_stats["batsman"].tolist()) if HAS_VS_STATS and not vs_stats.empty else {}
+VS_BOWLER_INDEX = build_name_index(vs_stats["bowler"].tolist()) if HAS_VS_STATS and not vs_stats.empty else {}
+MAIN_BATSMAN_INDEX = build_name_index(main_df["batsman"].tolist()) if HAS_MAIN_DF and not main_df.empty else {}
+MAIN_BOWLER_INDEX = build_name_index(main_df["bowler"].tolist()) if HAS_MAIN_DF and not main_df.empty else {}
+
+
+def resolve_name(name, index):
+    key = normalize_person_key(name)
+    if not key:
+        return str(name)
+    if key in PLAYER_ALIASES:
+        return PLAYER_ALIASES[key]
+    if key in index:
+        return index[key]
+
+    compact = "".join(key.split())
+    if compact in index:
+        return index[compact]
+
+    parts = key.split()
+    if len(parts) >= 2:
+        initial_surname = f"{parts[0][0]} {parts[-1]}"
+        if initial_surname in index:
+            return index[initial_surname]
+        initial_surname_compact = f"{parts[0][0]}{parts[-1]}"
+        if initial_surname_compact in index:
+            return index[initial_surname_compact]
+
+    matches = get_close_matches(key, list(index.keys()), n=1, cutoff=0.82)
+    if matches:
+        return index[matches[0]]
+
+    candidates = list(dict.fromkeys(index.values()))
+    if candidates:
+        best_name = str(name)
+        best_score = 0.0
+        for candidate in candidates:
+            candidate_key = normalize_person_key(candidate)
+            score = score_name_match(key, candidate_key)
+            if score > best_score:
+                best_score = score
+                best_name = candidate
+        if best_score >= 0.7:
+            return best_name
+    return str(name)
 
 
 def get_player_form(name):
@@ -35,8 +228,9 @@ def get_player_form(name):
         return None
     df = player_stats.copy()
     df["player"] = df["player"].astype(str).str.lower().str.strip()
+    resolved_name = resolve_name(name, PLAYER_NAME_INDEX)
 
-    row = df[df["player"] == norm(name)]
+    row = df[df["player"] == norm(resolved_name)]
     return float(row.iloc[0]["strike_rate"]) if len(row) else None
 
 
@@ -46,10 +240,12 @@ def get_vs(batsman, bowler):
     df = vs_stats.copy()
     df["batsman"] = df["batsman"].astype(str).str.lower().str.strip()
     df["bowler"] = df["bowler"].astype(str).str.lower().str.strip()
+    resolved_batsman = resolve_name(batsman, VS_BATSMAN_INDEX)
+    resolved_bowler = resolve_name(bowler, VS_BOWLER_INDEX)
 
     row = df[
-        (df["batsman"] == norm(batsman)) &
-        (df["bowler"] == norm(bowler))
+        (df["batsman"] == norm(resolved_batsman)) &
+        (df["bowler"] == norm(resolved_bowler))
     ]
 
     if len(row):
@@ -104,8 +300,8 @@ def retrieve_similar_scenarios(score, wickets, over, balls, target_runs, predict
     query_current_rr = score / max(over + balls / 6.0, 0.1)
     query_required_rr = target_runs / max(float(predict_overs), 1.0)
     venue_norm = normalize_venue_name(venue)
-    striker_norm = norm(striker)
-    bowler_norm = norm(bowler)
+    striker_norm = norm(resolve_name(striker, MAIN_BATSMAN_INDEX))
+    bowler_norm = norm(resolve_name(bowler, MAIN_BOWLER_INDEX))
 
     df["venue_norm"] = df["venue"].astype(str).apply(normalize_venue_name)
     df["batsman_norm"] = df["batsman"].astype(str).str.lower().str.strip()
@@ -190,8 +386,8 @@ def build_historical_evidence(striker, bowler, venue, target_runs, predict_overs
         df["window_runs"] = df["window_runs"] * (float(predict_overs) / supported_window)
 
     venue_norm = normalize_venue_name(venue)
-    striker_norm = norm(striker)
-    bowler_norm = norm(bowler)
+    striker_norm = norm(resolve_name(striker, MAIN_BATSMAN_INDEX))
+    bowler_norm = norm(resolve_name(bowler, MAIN_BOWLER_INDEX))
 
     def summarize(mask, label):
         subset = df[mask].dropna(subset=["window_runs"])

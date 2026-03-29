@@ -1,7 +1,7 @@
 const status = document.getElementById("status");
 const loader = document.getElementById("loader");
 const resultBox = document.getElementById("resultBox");
-const PREDICT_URL = "http://127.0.0.1:5000/predict-live";
+const PREDICT_URL = "http://127.0.0.1:5055/predict-live";
 
 async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
   const controller = new AbortController();
@@ -11,6 +11,19 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
     return await fetch(url, { ...options, signal: controller.signal });
   } finally {
     clearTimeout(timeoutId);
+  }
+}
+
+async function parseResponse(res) {
+  const text = await res.text();
+
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch (err) {
+    return {
+      status: "invalid_response",
+      message: text || "Backend returned a non-JSON response."
+    };
   }
 }
 
@@ -72,11 +85,12 @@ async function runPrediction(payload) {
       body: JSON.stringify(payload)
     }, 12000);
 
-    if (!res.ok) {
-      throw new Error("Server error");
-    }
+    const json = await parseResponse(res);
 
-    const json = await res.json();
+    if (!res.ok) {
+      showError(json.message || `Prediction request failed (HTTP ${res.status}).`);
+      return;
+    }
 
     if (json.status === "no_live_match") {
       showError("No live match data was available for prediction.");
@@ -105,7 +119,7 @@ async function runPrediction(payload) {
       json.analysis || "Prediction completed, but no analysis text was returned.";
   } catch (err) {
     console.log(err);
-    showError("Could not reach the backend in time. Check that the Flask server is running on port 5000.");
+    showError("Could not reach the backend in time. Check that the Flask server is running on port 5055.");
   } finally {
     loader.classList.add("hidden");
   }
