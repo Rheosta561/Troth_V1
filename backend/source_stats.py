@@ -1,13 +1,14 @@
 import re
 from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from duckduckgo_search import DDGS
 
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+DDG_HTML_URL = "https://html.duckduckgo.com/html/"
 
 
 def _fetch_page_text(url):
@@ -32,16 +33,8 @@ def _extract_float(patterns, text):
 
 
 def _search_urls(query, allowed_domains, limit=5):
-    urls = []
-    try:
-        with DDGS() as ddgs:
-            for item in ddgs.text(query, max_results=limit):
-                href = item.get("href") or item.get("url") or ""
-                if any(domain in href for domain in allowed_domains):
-                    urls.append(href)
-    except Exception:
-        return []
-    return urls
+    results = _search_duckduckgo(query, allowed_domains, limit=limit)
+    return [item.get("source", "") for item in results if item.get("source")]
 
 
 def _run_with_timeout(fn, timeout_seconds, fallback):
@@ -58,6 +51,52 @@ def _run_with_timeout(fn, timeout_seconds, fallback):
 def _clean_snippet(text):
     value = " ".join(str(text or "").split())
     return value[:220]
+
+
+def _search_duckduckgo(query, allowed_domains=None, limit=5):
+    allowed_domains = allowed_domains or []
+    try:
+        res = requests.get(
+            DDG_HTML_URL,
+            params={"q": query},
+            timeout=3,
+            headers={"User-Agent": USER_AGENT},
+        )
+        res.raise_for_status()
+    except Exception:
+        return []
+
+    soup = BeautifulSoup(res.text, "html.parser")
+    results = []
+
+    for anchor in soup.select("a.result__a, a.result-link"):
+        href = anchor.get("href") or ""
+        if href.startswith("/"):
+            href = urljoin(DDG_HTML_URL, href)
+
+        if allowed_domains and not any(domain in href for domain in allowed_domains):
+            continue
+
+        container = anchor.find_parent(class_="result") or anchor.parent
+        snippet_node = None
+        if container is not None:
+            snippet_node = container.select_one(".result__snippet, .result-snippet")
+
+        title = _clean_snippet(anchor.get_text(" ", strip=True))
+        snippet = _clean_snippet(snippet_node.get_text(" ", strip=True) if snippet_node else "")
+        if not href or not (title or snippet):
+            continue
+
+        results.append({
+            "title": title,
+            "snippet": snippet,
+            "source": href,
+        })
+
+        if len(results) >= limit:
+            break
+
+    return results
 
 
 @lru_cache(maxsize=256)
@@ -129,26 +168,26 @@ def fetch_search_context(striker, non_striker, bowler, venue, target_runs, predi
         ]
 
         evidence = []
-        with DDGS() as ddgs:
-            for query, label in queries:
-                try:
-                    results = list(ddgs.text(query, max_results=2))
-                except Exception:
-                    continue
+        allowed_domains = ["espncricinfo.com", "cricbuzz.com", "iplt20.com"]
+        for query, label in queries:
+            try:
+                results = _search_duckduckgo(query, allowed_domains=allowed_domains, limit=2)
+            except Exception:
+                continue
 
-                for item in results:
-                    snippet = _clean_snippet(item.get("body") or item.get("snippet") or "")
-                    href = item.get("href") or item.get("url") or ""
-                    title = _clean_snippet(item.get("title") or label)
-                    if not snippet:
-                        continue
-                    evidence.append({
-                        "label": label,
-                        "title": title,
-                        "snippet": snippet,
-                        "source": href,
-                    })
-                    break
+            for item in results:
+                snippet = _clean_snippet(item.get("snippet") or "")
+                href = item.get("source") or ""
+                title = _clean_snippet(item.get("title") or label)
+                if not snippet:
+                    continue
+                evidence.append({
+                    "label": label,
+                    "title": title,
+                    "snippet": snippet,
+                    "source": href,
+                })
+                break
 
         return evidence[:5]
 

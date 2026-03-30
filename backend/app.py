@@ -7,6 +7,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 
+from source_stats import fetch_search_context
 from utils import (
     build_historical_evidence,
     get_player_form,
@@ -435,7 +436,15 @@ def predict():
     )
     historical_evidence = build_historical_evidence_text(evidence_items)
     similarity_summary = build_similarity_summary(similarity_result, runs_needed, max(window_overs, 0.1))
-    search_evidence_text = "DuckDuckGo venue/player search is disabled in the live pipeline to keep predictions stable."
+    search_items = fetch_search_context(
+        striker=striker,
+        non_striker=non_striker,
+        bowler=bowler,
+        venue=venue,
+        target_runs=runs_needed,
+        predict_overs=max(window_overs, 0.1),
+    )
+    search_evidence_text = build_search_evidence_text(search_items)
 
     analysis = build_deterministic_analysis(
         prediction=prediction,
@@ -488,6 +497,7 @@ def predict():
         "probability": round(prob, 3),
         "historical_evidence": historical_evidence,
         "searched_evidence": search_evidence_text,
+        "searched_evidence_items": search_items,
         "analysis": analysis,
     })
 
