@@ -1,0 +1,227 @@
+batsman,bowler,runs,balls,average,strike_rate,dismissals
+Priyansh Arya,Mohammed Siraj,14,9,14.0,155.55555555555557,0
+P Simran Singh,K Rabada,5,5,5.0,100.0,1
+Priyansh Arya,K Rabada,8,5,8.0,160.0,0
+P Simran Singh,Mohammed Siraj,0,3,0.0,0.0,0
+SS Iyer,K Rabada,24,13,24.0,184.6153846153846,0
+Priyansh Arya,Arshad Khan,20,7,20.0,285.7142857142857,0
+Priyansh Arya,Rashid Khan,5,3,5.0,166.66666666666669,1
+SS Iyer,Rashid Khan,17,9,17.0,188.88888888888889,0
+Azmatullah Omarzai,Rashid Khan,6,2,6.0,300.0,0
+SS Iyer,M Prasidh Krishna,32,11,32.0,290.90909090909093,0
+Azmatullah Omarzai,M Prasidh Krishna,9,7,9.0,128.57142857142858,0
+SS Iyer,R Sai Kishore,17,9,17.0,188.88888888888889,0
+Azmatullah Omarzai,R Sai Kishore,1,6,1.0,16.666666666666664,1
+GJ Maxwell,R Sai Kishore,0,1,0.0,0.0,1
+MP Stoinis,R Sai Kishore,10,6,10.0,166.66666666666669,1
+MP Stoinis,Rashid Khan,2,5,2.0,40.0,0
+MP Stoinis,Mohammed Siraj,8,5,8.0,160.0,0
+SS Iyer,Mohammed Siraj,7,3,7.0,233.33333333333334,0
+Shashank Singh,R Sai Kishore,5,6,5.0,83.33333333333334,1
+Shashank Singh,Rashid Khan,29,12,29.0,241.66666666666666,0
+Shashank Singh,K Rabada,2,3,2.0,66.66666666666666,0
+Shashank Singh,Mohammed Siraj,22,7,22.0,314.2857142857143,0
+B Sai Sudharsan,Arshdeep Singh,37,32,18.5,115.625,2
+B Sai Sudharsan,Azmatullah Omarzai,10,5,10.0,200.0,0
+Shubman Gill,Azmatullah Omarzai,19,7,19.0,271.42857142857144,0
+Shubman Gill,Arshdeep Singh,51,38,51.0,134.21052631578948,0
+B Sai Sudharsan,M Jansen,8,5,8.0,160.0,0
+Shubman Gill,M Jansen,7,3,7.0,233.33333333333334,0
+B Sai Sudharsan,GJ Maxwell,10,6,10.0,166.66666666666669,0
+Shubman Gill,GJ Maxwell,6,3,6.0,200.0,1
+JC Buttler,GJ Maxwell,9,4,9.0,225.0,0
+B Sai Sudharsan,MP Stoinis,11,3,11.0,366.66666666666663,0
+JC Buttler,MP Stoinis,3,3,3.0,100.0,0
+JC Buttler,YS Chahal,4,6,4.0,66.66666666666666,0
+B Sai Sudharsan,YS Chahal,29,13,29.0,223.0769230769231,0
+JC Buttler,M Jansen,22,13,22.0,169.23076923076923,1
+JC Buttler,Arshdeep Singh,13,4,13.0,325.0,0
+SE Rutherford,Arshdeep Singh,9,5,9.0,180.0,1
+SE Rutherford,MP Stoinis,17,6,17.0,283.33333333333337,0
+SE Rutherford,Vijaykumar Vyshak,14,18,14.0,77.77777777777779,0
+JC Buttler,Vijaykumar Vyshak,3,3,3.0,100.0,0
+SE Rutherford,M Jansen,6,4,6.0,150.0,0
+R Tewatia,Vijaykumar Vyshak,6,2,6.0,300.0,0
+Arshad Khan,Arshdeep Singh,1,1,1.0,100.0,0
+M Shahrukh Khan,Arshdeep Singh,6,1,6.0,600.0,0
+SM Curran,Azmatullah Omarzai,7,6,7.0,116.66666666666667,1
+P Simran Singh,Azmatullah Omarzai,9,11,9.0,81.81818181818183,0
+P Simran Singh,S Sandeep Warrier,20,7,20.0,285.7142857142857,0
+SM Curran,MM Sharma,10,16,10.0,62.5,1
+P Simran Singh,MM Sharma,7,3,7.0,233.33333333333334,1
+SM Curran,Rashid Khan,16,16,16.0,100.0,1
+P Simran Singh,Rashid Khan,13,11,13.0,118.18181818181819,0
+RR Rossouw,MM Sharma,4,3,4.0,133.33333333333331,0
+SM Curran,Noor Ahmad,5,6,5.0,83.33333333333334,0
+RR Rossouw,Noor Ahmad,5,4,5.0,125.0,1
+JM Sharma,Rashid Khan,33,22,33.0,150.0,1
+LS Livingstone,Rashid Khan,12,13,12.0,92.3076923076923,1
+JM Sharma,Noor Ahmad,3,3,3.0,100.0,0
+LS Livingstone,Noor Ahmad,5,6,5.0,83.33333333333334,1
+Shashank Singh,Noor Ahmad,13,13,13.0,100.0,0
+JM Sharma,R Sai Kishore,6,4,6.0,150.0,1
+Ashutosh Sharma,R Sai Kishore,1,5,1.0,20.0,1
+Ashutosh Sharma,Noor Ahmad,2,3,2.0,66.66666666666666,0
+Harpreet Singh,R Sai Kishore,5,4,5.0,125.0,0
+Harpreet Singh,Rashid Khan,2,4,2.0,50.0,0
+Harpreet Brar,R Sai Kishore,17,8,17.0,212.5,1
+Harpreet Singh,M Shahrukh Khan,4,4,4.0,100.0,0
+Harpreet Brar,M Shahrukh Khan,3,2,3.0,150.0,0
+Harpreet Singh,MM Sharma,3,7,3.0,42.857142857142854,1
+Harpreet Brar,MM Sharma,10,5,10.0,200.0,0
+HV Patel,MM Sharma,0,1,0.0,0.0,1
+K Rabada,MM Sharma,1,1,1.0,100.0,0
+WP Saha,K Rabada,32,24,10.666666666666666,133.33333333333331,3
+Shubman Gill,K Rabada,66,36,66.0,183.33333333333331,1
+WP Saha,Arshdeep Singh,31,19,31.0,163.1578947368421,1
+Shubman Gill,HV Patel,28,16,28.0,175.0,0
+B Sai Sudharsan,HV Patel,2,5,2.0,40.0,1
+Shubman Gill,SM Curran,21,16,21.0,131.25,1
+B Sai Sudharsan,SM Curran,16,16,16.0,100.0,1
+B Sai Sudharsan,Harpreet Brar,15,12,15.0,125.0,0
+Shubman Gill,Harpreet Brar,36,28,36.0,128.57142857142858,0
+B Sai Sudharsan,LS Livingstone,19,19,19.0,100.0,0
+Shubman Gill,LS Livingstone,15,10,15.0,150.0,1
+DA Miller,LS Livingstone,7,12,3.5,58.333333333333336,2
+B Sai Sudharsan,K Rabada,28,21,28.0,133.33333333333331,0
+DA Miller,K Rabada,7,6,7.0,116.66666666666667,0
+Azmatullah Omarzai,LS Livingstone,3,3,3.0,100.0,0
+Azmatullah Omarzai,Harpreet Brar,7,4,7.0,175.0,0
+Azmatullah Omarzai,SM Curran,1,1,1.0,100.0,0
+R Tewatia,SM Curran,9,4,9.0,225.0,0
+Azmatullah Omarzai,HV Patel,2,2,2.0,100.0,1
+M Shahrukh Khan,HV Patel,1,2,1.0,50.0,1
+R Tewatia,HV Patel,15,12,15.0,125.0,0
+R Tewatia,Harpreet Brar,13,6,13.0,216.66666666666666,0
+R Tewatia,K Rabada,16,9,16.0,177.77777777777777,1
+M Shahrukh Khan,K Rabada,7,2,7.0,350.0,0
+Rashid Khan,HV Patel,3,3,3.0,100.0,1
+R Tewatia,Arshdeep Singh,15,6,15.0,250.0,0
+WP Saha,Harpreet Brar,3,7,3.0,42.857142857142854,0
+KS Williamson,Arshdeep Singh,1,3,1.0,33.33333333333333,0
+KS Williamson,K Rabada,5,5,5.0,100.0,0
+KS Williamson,SM Curran,10,5,10.0,200.0,0
+KS Williamson,Harpreet Brar,8,7,8.0,114.28571428571428,1
+KS Williamson,HV Patel,2,2,2.0,100.0,0
+Shubman Gill,Sikandar Raza,7,5,7.0,140.0,0
+B Sai Sudharsan,Sikandar Raza,15,7,15.0,214.28571428571428,0
+V Shankar,HV Patel,3,3,3.0,100.0,0
+V Shankar,Harpreet Brar,2,3,2.0,66.66666666666666,0
+V Shankar,Arshdeep Singh,3,3,3.0,100.0,0
+V Shankar,K Rabada,0,1,0.0,0.0,1
+S Dhawan,Azmatullah Omarzai,1,1,1.0,100.0,0
+JM Bairstow,Azmatullah Omarzai,18,8,18.0,225.0,0
+S Dhawan,UT Yadav,0,1,0.0,0.0,1
+P Simran Singh,UT Yadav,16,9,16.0,177.77777777777777,0
+JM Bairstow,UT Yadav,2,2,2.0,100.0,0
+JM Bairstow,Rashid Khan,2,2,2.0,100.0,0
+JM Bairstow,Noor Ahmad,0,1,0.0,0.0,1
+P Simran Singh,Noor Ahmad,5,5,5.0,100.0,1
+Sikandar Raza,Noor Ahmad,11,9,11.0,122.22222222222223,0
+Sikandar Raza,Azmatullah Omarzai,1,4,1.0,25.0,0
+Shashank Singh,Azmatullah Omarzai,2,2,2.0,100.0,0
+Sikandar Raza,UT Yadav,3,3,3.0,100.0,0
+Shashank Singh,UT Yadav,14,3,14.0,466.6666666666667,0
+Shashank Singh,MM Sharma,22,11,22.0,200.0,0
+Sikandar Raza,MM Sharma,0,1,0.0,0.0,1
+JM Sharma,MM Sharma,3,5,3.0,60.0,1
+Ashutosh Sharma,Rashid Khan,2,2,2.0,100.0,0
+Ashutosh Sharma,MM Sharma,14,9,14.0,155.55555555555557,0
+Ashutosh Sharma,Azmatullah Omarzai,15,5,15.0,300.0,0
+Ashutosh Sharma,DG Nalkande,0,1,0.0,0.0,1
+Harpreet Brar,DG Nalkande,1,3,1.0,33.33333333333333,0
+Shashank Singh,DG Nalkande,4,2,4.0,200.0,0
+MA Agarwal,Mohammed Shami,5,6,5.0,83.33333333333334,0
+MA Agarwal,HH Pandya,0,3,0.0,0.0,1
+S Dhawan,HH Pandya,6,6,6.0,100.0,0
+S Dhawan,Mohammed Shami,10,10,10.0,100.0,0
+JM Bairstow,Mohammed Shami,5,9,5.0,55.55555555555556,1
+JM Bairstow,HH Pandya,4,3,4.0,133.33333333333331,0
+S Dhawan,LH Ferguson,28,24,28.0,116.66666666666667,0
+JM Bairstow,LH Ferguson,0,2,0.0,0.0,1
+LS Livingstone,LH Ferguson,5,2,5.0,250.0,0
+S Dhawan,Rashid Khan,19,21,19.0,90.47619047619048,1
+LS Livingstone,DG Nalkande,32,12,32.0,266.66666666666663,0
+S Dhawan,DG Nalkande,3,4,3.0,75.0,0
+LS Livingstone,HH Pandya,2,4,2.0,50.0,0
+JM Sharma,HH Pandya,7,3,7.0,233.33333333333334,0
+LS Livingstone,R Tewatia,11,3,11.0,366.66666666666663,0
+JM Sharma,R Tewatia,13,3,13.0,433.3333333333333,0
+JM Sharma,DG Nalkande,0,1,0.0,0.0,1
+OF Smith,DG Nalkande,0,1,0.0,0.0,1
+M Shahrukh Khan,DG Nalkande,1,1,1.0,100.0,0
+LS Livingstone,Mohammed Shami,33,8,33.0,412.5,0
+M Shahrukh Khan,Mohammed Shami,22,7,22.0,314.2857142857143,0
+M Shahrukh Khan,Rashid Khan,1,3,1.0,33.33333333333333,1
+K Rabada,Rashid Khan,1,1,1.0,100.0,0
+RD Chahar,Rashid Khan,1,1,1.0,100.0,0
+RD Chahar,LH Ferguson,8,8,8.0,100.0,0
+VG Arora,LH Ferguson,1,3,1.0,33.33333333333333,0
+VG Arora,Mohammed Shami,1,4,1.0,25.0,1
+RD Chahar,Mohammed Shami,1,1,1.0,100.0,0
+Arshdeep Singh,Mohammed Shami,2,1,2.0,200.0,0
+Arshdeep Singh,LH Ferguson,4,2,4.0,200.0,0
+RD Chahar,HH Pandya,12,4,12.0,300.0,0
+Arshdeep Singh,HH Pandya,4,2,4.0,200.0,0
+MS Wade,VG Arora,6,6,6.0,100.0,0
+Shubman Gill,VG Arora,24,13,24.0,184.6153846153846,0
+MS Wade,K Rabada,0,1,0.0,0.0,1
+B Sai Sudharsan,VG Arora,4,5,4.0,80.0,0
+B Sai Sudharsan,RD Chahar,20,16,20.0,125.0,1
+Shubman Gill,RD Chahar,38,24,38.0,158.33333333333331,0
+B Sai Sudharsan,OF Smith,7,7,7.0,100.0,0
+Shubman Gill,OF Smith,9,5,9.0,180.0,0
+HH Pandya,RD Chahar,10,7,10.0,142.85714285714286,0
+HH Pandya,Arshdeep Singh,9,15,9.0,60.0,0
+HH Pandya,K Rabada,15,10,15.0,150.0,0
+DA Miller,OF Smith,5,4,5.0,125.0,0
+R Tewatia,OF Smith,13,3,13.0,433.3333333333333,0
+WP Saha,Sandeep Sharma,9,11,9.0,81.81818181818183,0
+Shubman Gill,Sandeep Sharma,0,1,0.0,0.0,1
+B Sai Sudharsan,Sandeep Sharma,5,10,5.0,50.0,0
+HH Pandya,Sandeep Sharma,0,1,0.0,0.0,0
+B Sai Sudharsan,R Dhawan,15,15,15.0,100.0,0
+HH Pandya,R Dhawan,0,1,0.0,0.0,1
+DA Miller,R Dhawan,5,6,5.0,83.33333333333334,0
+DA Miller,Sandeep Sharma,2,2,2.0,100.0,0
+R Tewatia,LS Livingstone,1,2,1.0,50.0,0
+R Tewatia,R Dhawan,3,5,3.0,60.0,0
+R Tewatia,RD Chahar,3,2,3.0,150.0,0
+Rashid Khan,K Rabada,0,1,0.0,0.0,1
+PJ Sangwan,K Rabada,1,4,1.0,25.0,0
+PJ Sangwan,Arshdeep Singh,1,2,1.0,50.0,1
+LH Ferguson,Arshdeep Singh,1,1,1.0,100.0,0
+LH Ferguson,K Rabada,4,2,4.0,200.0,1
+AS Joseph,K Rabada,2,3,2.0,66.66666666666666,0
+AS Joseph,Arshdeep Singh,2,2,2.0,100.0,0
+S Dhawan,PJ Sangwan,13,8,13.0,162.5,0
+PBB Rajapaksa,Mohammed Shami,10,6,10.0,166.66666666666669,0
+S Dhawan,AS Joseph,18,12,18.0,150.0,0
+PBB Rajapaksa,AS Joseph,11,14,11.0,78.57142857142857,1
+PBB Rajapaksa,LH Ferguson,8,5,8.0,160.0,1
+PBB Rajapaksa,PJ Sangwan,10,4,10.0,250.0,0
+PBB Rajapaksa,Rashid Khan,10,15,10.0,66.66666666666666,0
+P Simran Singh,Mohammed Shami,0,2,0.0,0.0,1
+MW Short,Mohammed Shami,18,11,18.0,163.63636363636365,0
+S Dhawan,J Little,8,9,8.0,88.88888888888889,1
+PBB Rajapaksa,J Little,3,5,3.0,60.0,0
+MW Short,J Little,7,6,7.0,116.66666666666667,0
+MW Short,AS Joseph,10,8,10.0,125.0,0
+MW Short,Rashid Khan,1,2,1.0,50.0,1
+JM Sharma,AS Joseph,3,8,3.0,37.5,0
+PBB Rajapaksa,MM Sharma,8,8,8.0,100.0,0
+JM Sharma,Mohammed Shami,9,5,9.0,180.0,0
+SM Curran,AS Joseph,3,5,3.0,60.0,0
+M Shahrukh Khan,AS Joseph,6,1,6.0,600.0,0
+SM Curran,Mohammed Shami,6,3,6.0,200.0,0
+M Shahrukh Khan,MM Sharma,5,3,5.0,166.66666666666669,0
+M Shahrukh Khan,J Little,2,3,2.0,66.66666666666666,1
+Harpreet Brar,J Little,7,3,7.0,233.33333333333334,0
+R Dhawan,J Little,1,1,1.0,100.0,0
+B Sai Sudharsan,MW Short,6,4,6.0,150.0,0
+Shubman Gill,MW Short,2,2,2.0,100.0,0
+HH Pandya,Harpreet Brar,2,3,2.0,66.66666666666666,1
+DA Miller,Harpreet Brar,2,2,2.0,100.0,0
+DA Miller,RD Chahar,3,3,3.0,100.0,0
+DA Miller,SM Curran,4,5,4.0,80.0,0
+DA Miller,Arshdeep Singh,3,4,3.0,75.0,0

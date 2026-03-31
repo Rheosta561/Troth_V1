@@ -29,7 +29,7 @@ checkpoint_bowler_count = state_dict["bowler_emb.weight"].shape[0]
 
 
 def rebuild_training_maps():
-    df = pd.read_csv(BASE_DIR / "csk_rr_dynamic_dataset.csv")
+    df = pd.read_csv(BASE_DIR / "gt_pbks_dynamic_dataset.csv")
     df = df.replace([np.inf, -np.inf], np.nan).fillna(0)
     df = df[(df["future_runs_6"] > 5) & (df["future_runs_6"] < 100)]
     df["wickets_left"] = 10 - df["wickets"]
@@ -300,8 +300,8 @@ def predict():
     striker = safe(data, "striker", "Unknown")
     non_striker = safe(data, "non_striker", "Unknown")
     bowler = safe(data, "bowler", "Unknown")
-    batting_team = safe(data, "batting_team", "Mumbai Indians")
-    bowling_team = safe(data, "bowling_team", "Kolkata Knight Riders")
+    batting_team = safe(data, "batting_team", "Gujarat Titans")
+    bowling_team = safe(data, "bowling_team", "Punjab Kings")
     venue = safe(data, "venue", "Unknown")
     target_total = safe(data, "target_total", 0)
     total_overs = max(safe(data, "total_overs", 20), 1)

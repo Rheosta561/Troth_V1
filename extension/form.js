@@ -12,98 +12,76 @@ const PREDICT_URL = "http://127.0.0.1:5055/predict-live";
 const HEALTH_URL = "http://127.0.0.1:5055/health";
 
 const TEAM_SQUADS = {
-  csk: {
+  gt: {
     batters: [
-      "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
-      "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel"
+      "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra"
     ],
     allRounders: [
-      "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew William Short",
-      "Aman Khan", "Zak Foulkes", "Shivam Dube"
+      "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder"
     ],
     bowlers: [
-      "Khaleel Ahmed", "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary",
-      "Shreyas Gopal", "Gurjapneet Singh", "Akeal Hosein", "Matt Henry",
-      "Rahul Chahar", "Spencer Johnson"
+      "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
+      "Sai Kishore", "Ishant Sharma"
     ]
   },
-  "chennai super kings": {
+  "gujarat titans": {
     batters: [
-      "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
-      "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel"
+      "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra"
     ],
     allRounders: [
-      "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew William Short",
-      "Aman Khan", "Zak Foulkes", "Shivam Dube"
+      "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder"
     ],
     bowlers: [
-      "Khaleel Ahmed", "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary",
-      "Shreyas Gopal", "Gurjapneet Singh", "Akeal Hosein", "Matt Henry",
-      "Rahul Chahar", "Spencer Johnson"
+      "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
+      "Sai Kishore", "Ishant Sharma"
     ]
   },
-  rr: {
+  pbks: {
     batters: [
-      "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorious",
-      "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal", "Dhruv Jurel"
+      "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya"
     ],
     allRounders: [
-      "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja", "Dasun Shanaka"
+      "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar"
     ],
     bowlers: [
-      "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka", "Ravi Bishnoi",
-      "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur", "Brijesh Sharma",
-      "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+      "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
     ]
   },
-  "rajasthan royals": {
+  "punjab kings": {
     batters: [
-      "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorious",
-      "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal", "Dhruv Jurel"
+      "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya"
     ],
     allRounders: [
-      "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja", "Dasun Shanaka"
+      "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar"
     ],
     bowlers: [
-      "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka", "Ravi Bishnoi",
-      "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur", "Brijesh Sharma",
-      "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+      "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
     ]
   }
 };
 
 const TEAM_PLAYERS = {
-  csk: [
-    "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
-    "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel",
-    "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew Short",
-    "Aman Khan", "Zak Foulkes", "Shivam Dube", "Khaleel Ahmed",
-    "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary", "Shreyas Gopal",
-    "Gurjapneet Singh", "Akeal Hosein", "Matt Henry", "Rahul Chahar", "Spencer Johnson"
+  gt: [
+    "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra",
+    "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder",
+    "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
+    "Sai Kishore", "Ishant Sharma"
   ],
-  "chennai super kings": [
-    "Ruturaj Gaikwad", "MS Dhoni", "Sanju Samson", "Dewald Brevis",
-    "Ayush Mhatre", "Kartik Sharma", "Sarfaraz Khan", "Urvil Patel",
-    "Jamie Overton", "Ramakrishna Ghosh", "Prashant Veer", "Matthew Short",
-    "Aman Khan", "Zak Foulkes", "Shivam Dube", "Khaleel Ahmed",
-    "Noor Ahmad", "Anshul Kamboj", "Mukesh Choudhary", "Shreyas Gopal",
-    "Gurjapneet Singh", "Akeal Hosein", "Matt Henry", "Rahul Chahar", "Spencer Johnson"
+  "gujarat titans": [
+    "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra",
+    "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder",
+    "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
+    "Sai Kishore", "Ishant Sharma"
   ],
-  rr: [
-    "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorius",
-    "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal",
-    "Dhruv Jurel", "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja",
-    "Dasun Shanaka", "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka",
-    "Ravi Bishnoi", "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur",
-    "Brijesh Sharma", "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+  pbks: [
+    "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya",
+    "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar",
+    "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
   ],
-  "rajasthan royals": [
-    "Shubham Dubey", "Vaibhav Suryavanshi", "Donovan Ferreira", "Lhuan-dre Pretorius",
-    "Ravi Singh", "Aman Rao Perala", "Shimron Hetmyer", "Yashasvi Jaiswal",
-    "Dhruv Jurel", "Riyan Parag", "Yudhvir Singh Charak", "Ravindra Jadeja",
-    "Dasun Shanaka", "Jofra Archer", "Tushar Deshpande", "Kwena Maphaka",
-    "Ravi Bishnoi", "Sushant Mishra", "Yash Raj Punja", "Vignesh Puthur",
-    "Brijesh Sharma", "Adam Milne", "Kuldeep Sen", "Sandeep Sharma", "Nandre Burger"
+  "punjab kings": [
+    "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya",
+    "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar",
+    "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
   ]
 };
 
