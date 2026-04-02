@@ -12,76 +12,92 @@ const PREDICT_URL = "http://127.0.0.1:5055/predict-live";
 const HEALTH_URL = "http://127.0.0.1:5055/health";
 
 const TEAM_SQUADS = {
-  gt: {
+  srh: {
     batters: [
-      "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra"
+      "Ishan Kishan", "Aniket Verma", "Smaran Ravichandran", "Salil Arora",
+      "Heinrich Klaasen", "Travis Head"
     ],
     allRounders: [
-      "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder"
+      "Harshal Patel", "Kamindu Mendis", "Harsh Dubey", "Brydon Carse",
+      "Shivang Kumar", "Krains Fuletra", "Liam Livingstone", "David Payne",
+      "Abhishek Sharma", "Nitish Kumar Reddy"
     ],
     bowlers: [
-      "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
-      "Sai Kishore", "Ishant Sharma"
+      "Pat Cummins", "Zeeshan Ansari", "Jaydev Unadkat", "Eshan Malinga",
+      "Sakib Hussain", "Onkar Tarmale", "Amit Kumar", "Praful Hinge", "Shivam Mavi"
     ]
   },
-  "gujarat titans": {
+  "sunrisers hyderabad": {
     batters: [
-      "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra"
+      "Ishan Kishan", "Aniket Verma", "Smaran Ravichandran", "Salil Arora",
+      "Heinrich Klaasen", "Travis Head"
     ],
     allRounders: [
-      "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder"
+      "Harshal Patel", "Kamindu Mendis", "Harsh Dubey", "Brydon Carse",
+      "Shivang Kumar", "Krains Fuletra", "Liam Livingstone", "David Payne",
+      "Abhishek Sharma", "Nitish Kumar Reddy"
     ],
     bowlers: [
-      "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
-      "Sai Kishore", "Ishant Sharma"
+      "Pat Cummins", "Zeeshan Ansari", "Jaydev Unadkat", "Eshan Malinga",
+      "Sakib Hussain", "Onkar Tarmale", "Amit Kumar", "Praful Hinge", "Shivam Mavi"
     ]
   },
-  pbks: {
+  kkr: {
     batters: [
-      "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya"
+      "Ajinkya Rahane", "Rinku Singh", "Angkrish Raghuvanshi", "Manish Pandey",
+      "Finn Allen", "Tejasvi Singh", "Rahul Tripathi", "Tim Seifert", "Rovman Powell"
     ],
     allRounders: [
-      "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar"
+      "Anukul Roy", "Cameron Green", "Sarthak Ranjan", "Daksh Kamra",
+      "Rachin Ravindra", "Ramandeep Singh", "Sunil Narine"
     ],
     bowlers: [
-      "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
+      "Blessing Muzarabani", "Vaibhav Arora", "Matheesha Pathirana", "Kartik Tyagi",
+      "Prashant Solanki", "Saurabh Dubey", "Navdeep Saini", "Umran Malik",
+      "Varun Chakaravarthy"
     ]
   },
-  "punjab kings": {
+  "kolkata knight riders": {
     batters: [
-      "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya"
+      "Ajinkya Rahane", "Rinku Singh", "Angkrish Raghuvanshi", "Manish Pandey",
+      "Finn Allen", "Tejasvi Singh", "Rahul Tripathi", "Tim Seifert", "Rovman Powell"
     ],
     allRounders: [
-      "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar"
+      "Anukul Roy", "Cameron Green", "Sarthak Ranjan", "Daksh Kamra",
+      "Rachin Ravindra", "Ramandeep Singh", "Sunil Narine"
     ],
     bowlers: [
-      "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
+      "Blessing Muzarabani", "Vaibhav Arora", "Matheesha Pathirana", "Kartik Tyagi",
+      "Prashant Solanki", "Saurabh Dubey", "Navdeep Saini", "Umran Malik",
+      "Varun Chakaravarthy"
     ]
   }
 };
 
 const TEAM_PLAYERS = {
-  gt: [
-    "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra",
-    "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder",
-    "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
-    "Sai Kishore", "Ishant Sharma"
+  srh: [
+    "Top order: Travis Head, Abhishek Sharma, Ishan Kishan, Heinrich Klaasen, Aiden Markram",
+    "Middle/death hitters: Nitish Kumar Reddy, Abdul Samad, Liam Livingstone, Aniket Verma",
+    "Spinners: Zeeshan Ansari, Kamindu Mendis, Harsh Dubey",
+    "Pacers: Pat Cummins, Jaydev Unadkat, Eshan Malinga, Shivam Mavi, Harshal Patel, Brydon Carse"
   ],
-  "gujarat titans": [
-    "Shubman Gill", "Sai Sudharsan", "Jos Buttler", "Shahrukh Khan", "Kumar Kushagra",
-    "Rahul Tewatia", "Washington Sundar", "Glenn Phillips", "Jason Holder",
-    "Rashid Khan", "Kagiso Rabada", "Mohammed Siraj", "Prasidh Krishna",
-    "Sai Kishore", "Ishant Sharma"
+  "sunrisers hyderabad": [
+    "Top order: Travis Head, Abhishek Sharma, Ishan Kishan, Heinrich Klaasen, Aiden Markram",
+    "Middle/death hitters: Nitish Kumar Reddy, Abdul Samad, Liam Livingstone, Aniket Verma",
+    "Spinners: Zeeshan Ansari, Kamindu Mendis, Harsh Dubey",
+    "Pacers: Pat Cummins, Jaydev Unadkat, Eshan Malinga, Shivam Mavi, Harshal Patel, Brydon Carse"
   ],
-  pbks: [
-    "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya",
-    "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar",
-    "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
+  kkr: [
+    "Top order: Sunil Narine, Ajinkya Rahane, Angkrish Raghuvanshi, Finn Allen, Tim Seifert",
+    "Middle/death hitters: Rinku Singh, Rovman Powell, Ramandeep Singh, Cameron Green",
+    "Spinners: Sunil Narine, Varun Chakaravarthy, Anukul Roy, Prashant Solanki",
+    "Pacers: Vaibhav Arora, Kartik Tyagi, Matheesha Pathirana, Blessing Muzarabani, Navdeep Saini, Umran Malik"
   ],
-  "punjab kings": [
-    "Shreyas Iyer", "Prabhsimran Singh", "Shashank Singh", "Nehal Wadhera", "Priyansh Arya",
-    "Marcus Stoinis", "Marco Jansen", "Azmatullah Omarzai", "Harpreet Brar",
-    "Arshdeep Singh", "Yuzvendra Chahal", "Lockie Ferguson", "Nathan Ellis"
+  "kolkata knight riders": [
+    "Top order: Sunil Narine, Ajinkya Rahane, Angkrish Raghuvanshi, Finn Allen, Tim Seifert",
+    "Middle/death hitters: Rinku Singh, Rovman Powell, Ramandeep Singh, Cameron Green",
+    "Spinners: Sunil Narine, Varun Chakaravarthy, Anukul Roy, Prashant Solanki",
+    "Pacers: Vaibhav Arora, Kartik Tyagi, Matheesha Pathirana, Blessing Muzarabani, Navdeep Saini, Umran Malik"
   ]
 };
 

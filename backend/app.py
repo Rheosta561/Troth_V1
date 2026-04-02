@@ -29,7 +29,7 @@ checkpoint_bowler_count = state_dict["bowler_emb.weight"].shape[0]
 
 
 def rebuild_training_maps():
-    df = pd.read_csv(BASE_DIR / "gt_pbks_dynamic_dataset.csv")
+    df = pd.read_csv(BASE_DIR / "mi_kkr_dynamic_dataset.csv")
     df = df.replace([np.inf, -np.inf], np.nan).fillna(0)
     df = df[(df["future_runs_6"] > 5) & (df["future_runs_6"] < 100)]
     df["wickets_left"] = 10 - df["wickets"]
@@ -300,8 +300,8 @@ def predict():
     striker = safe(data, "striker", "Unknown")
     non_striker = safe(data, "non_striker", "Unknown")
     bowler = safe(data, "bowler", "Unknown")
-    batting_team = safe(data, "batting_team", "Gujarat Titans")
-    bowling_team = safe(data, "bowling_team", "Punjab Kings")
+    batting_team = safe(data, "batting_team", "Sunrisers Hyderabad")
+    bowling_team = safe(data, "bowling_team", "Kolkata Knight Riders")
     venue = safe(data, "venue", "Unknown")
     target_total = safe(data, "target_total", 0)
     total_overs = max(safe(data, "total_overs", 20), 1)
@@ -383,6 +383,7 @@ def predict():
 
     batsman_id = player_map.get(striker, 0)
     bowler_id = bowler_map.get(bowler, 0)
+    model_has_exact_entities = striker in player_map and bowler in bowler_map
     batsman_tensor = torch.tensor([batsman_id], dtype=torch.long)
     bowler_tensor = torch.tensor([bowler_id], dtype=torch.long)
 
@@ -403,7 +404,10 @@ def predict():
     historical_runs = similarity_result.get("predicted_runs")
 
     if historical_runs is not None:
-        predicted_runs = 0.6 * model_runs + 0.4 * historical_runs
+        if model_has_exact_entities:
+            predicted_runs = 0.55 * model_runs + 0.45 * historical_runs
+        else:
+            predicted_runs = 0.25 * model_runs + 0.75 * historical_runs
     else:
         predicted_runs = model_runs
 

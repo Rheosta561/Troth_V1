@@ -16,9 +16,44 @@ def _load_csv(filename):
     return pd.read_csv(path), True
 
 
-player_stats, HAS_PLAYER_STATS = _load_csv("gt_pbks_player_stats.csv")
-vs_stats, HAS_VS_STATS = _load_csv("gt_pbks_vs_stats.csv")
-main_df, HAS_MAIN_DF = _load_csv("gt_pbks_dynamic_dataset.csv")
+player_stats, HAS_PLAYER_STATS = _load_csv("srh_kkr_player_stats_enhanced.csv")
+vs_stats, HAS_VS_STATS = _load_csv("srh_kkr_vs_stats_enhanced.csv")
+
+
+def _build_srh_kkr_main_df():
+    kkr_df, has_kkr = _load_csv("mi_kkr_dynamic_dataset.csv")
+    srh_source, has_srh = _load_csv("rcb_srh_final_dataset.csv")
+
+    frames = []
+
+    if has_kkr and not kkr_df.empty:
+        frames.append(kkr_df.copy())
+
+    if has_srh and not srh_source.empty:
+        srh_df = srh_source.copy()
+        srh_df["batting_team_norm"] = srh_df["batting_team"].astype(str).str.lower().str.strip()
+        srh_df = srh_df[srh_df["batting_team_norm"].str.contains("sunrisers hyderabad", na=False)].copy()
+
+        if not srh_df.empty:
+            srh_df["future_runs_6"] = pd.to_numeric(srh_df.get("runs_next_36"), errors="coerce")
+            srh_df["future_runs_12"] = np.nan
+            srh_df["future_runs_18"] = np.nan
+            frames.append(
+                srh_df[[
+                    "venue", "batsman", "bowler", "over", "ball", "current_score",
+                    "wickets", "runs_last_6", "runs_last_12", "current_rr",
+                    "future_runs_6", "future_runs_12", "future_runs_18"
+                ]].copy()
+            )
+
+    if not frames:
+        return pd.DataFrame(), False
+
+    combined = pd.concat(frames, ignore_index=True, sort=False)
+    return combined, not combined.empty
+
+
+main_df, HAS_MAIN_DF = _build_srh_kkr_main_df()
 
 
 def norm(x):
@@ -61,61 +96,74 @@ VENUE_ALIASES = {
     "maharaja yadavindra singh international cricket stadium mullanpur": "mullanpur",
     "new chandigarh mullanpur": "mullanpur",
     "mullanpur": "mullanpur",
+    "ekana cricket stadium": "ekana",
+    "ekana cricket stadium lucknow": "ekana",
+    "bharat ratna shri atal bihari vajpayee ekana cricket stadium": "ekana",
+    "brsabv ekana cricket stadium": "ekana",
+    "lucknow": "ekana",
+    "rajiv gandhi international stadium": "uppal",
+    "rajiv gandhi international stadium hyderabad": "uppal",
+    "rajiv gandhi international stadium uppal": "uppal",
+    "uppal hyderabad": "uppal",
 }
 
 PLAYER_ALIASES = {
-    "gujarat titans": "Gujarat Titans",
-    "gt": "Gujarat Titans",
-    "punjab kings": "Punjab Kings",
-    "pbks": "Punjab Kings",
-    "shubman gill": "Shubman Gill",
-    "gill": "Shubman Gill",
-    "sai sudharsan": "Sai Sudharsan",
-    "sudharsan": "Sai Sudharsan",
-    "jos buttler": "Jos Buttler",
-    "buttler": "Jos Buttler",
-    "shahrukh khan": "M Shahrukh Khan",
-    "rahul tewatia": "Rahul Tewatia",
-    "tewatia": "Rahul Tewatia",
-    "washington sundar": "Washington Sundar",
-    "glenn phillips": "Glenn Phillips",
-    "rashid khan": "Rashid Khan",
-    "rashid": "Rashid Khan",
-    "kagiso rabada": "Kagiso Rabada",
-    "rabada": "Kagiso Rabada",
-    "mohammed siraj": "Mohammed Siraj",
-    "siraj": "Mohammed Siraj",
-    "prasidh krishna": "M Prasidh Krishna",
-    "krishna": "M Prasidh Krishna",
-    "sai kishore": "R Sai Kishore",
-    "ishant sharma": "Ishant Sharma",
-    "jason holder": "Jason Holder",
-    "shreyas iyer": "Shreyas Iyer",
-    "iyer": "Shreyas Iyer",
-    "prabhsimran singh": "Prabhsimran Singh",
-    "p simran singh": "Prabhsimran Singh",
-    "prabhsimran": "Prabhsimran Singh",
-    "shashank singh": "Shashank Singh",
-    "shashank": "Shashank Singh",
-    "marcus stoinis": "Marcus Stoinis",
-    "stoinis": "Marcus Stoinis",
-    "nehal wadhera": "Nehal Wadhera",
-    "wadhera": "Nehal Wadhera",
-    "marco jansen": "Marco Jansen",
-    "jansen": "Marco Jansen",
-    "arshdeep singh": "Arshdeep Singh",
-    "arshdeep": "Arshdeep Singh",
-    "yuzvendra chahal": "Yuzvendra Chahal",
-    "chahal": "Yuzvendra Chahal",
-    "azmatullah omarzai": "Azmatullah Omarzai",
-    "omarzai": "Azmatullah Omarzai",
-    "harpreet brar": "Harpreet Brar",
-    "brar": "Harpreet Brar",
-    "priyansh arya": "Priyansh Arya",
-    "arya": "Priyansh Arya",
-    "lockie ferguson": "L Ferguson",
-    "nathan ellis": "Nathan Ellis",
-    "kumar kushagra": "Kumar Kushagra",
+    "sunrisers hyderabad": "Sunrisers Hyderabad",
+    "srh": "Sunrisers Hyderabad",
+    "kolkata knight riders": "Kolkata Knight Riders",
+    "kkr": "Kolkata Knight Riders",
+    "ishan kishan": "Ishan Kishan",
+    "kishan": "Ishan Kishan",
+    "heinrich klaasen": "H Klaasen",
+    "klaasen": "H Klaasen",
+    "travis head": "TM Head",
+    "head": "TM Head",
+    "abhishek sharma": "Abhishek Sharma",
+    "nitish kumar reddy": "Nithish Kumar Reddy",
+    "nithish kumar reddy": "Nithish Kumar Reddy",
+    "nitish reddy": "Nithish Kumar Reddy",
+    "aiden markram": "AK Markram",
+    "markram": "AK Markram",
+    "abdul samad": "Abdul Samad",
+    "kamindu mendis": "Kamindu Mendis",
+    "harshal patel": "Harshal Patel",
+    "pat cummins": "PJ Cummins",
+    "cummins": "PJ Cummins",
+    "jaydev unadkat": "JD Unadkat",
+    "unadkat": "JD Unadkat",
+    "shivam mavi": "Shivam Mavi",
+    "umran malik": "Umran Malik",
+    "zeeshan ansari": "AS Roy",
+    "ajinkya rahane": "AM Rahane",
+    "rahane": "AM Rahane",
+    "rinku singh": "RK Singh",
+    "rinku": "RK Singh",
+    "angkrish raghuvanshi": "A Raghuvanshi",
+    "angkrish raghuwanshi": "A Raghuvanshi",
+    "raghuvanshi": "A Raghuvanshi",
+    "manish pandey": "MK Pandey",
+    "pandey": "MK Pandey",
+    "finn allen": "Finn Allen",
+    "rahul tripathi": "RA Tripathi",
+    "tripathi": "RA Tripathi",
+    "tim seifert": "TL Seifert",
+    "rovman powell": "R Powell",
+    "powell": "R Powell",
+    "anukul roy": "AS Roy",
+    "cameron green": "C Green",
+    "rachin ravindra": "R Ravindra",
+    "ramandeep singh": "Ramandeep Singh",
+    "sunil narine": "SP Narine",
+    "narine": "SP Narine",
+    "vaibhav arora": "VG Arora",
+    "arora": "VG Arora",
+    "kartik tyagi": "Kartik Tyagi",
+    "varun chakaravarthy": "CV Varun",
+    "varun chakravarthy": "CV Varun",
+    "varun": "CV Varun",
+    "umran malik": "Umran Malik",
+    "harshit rana": "Harshit Rana",
+    "matheesha pathirana": "Matheesha Pathirana",
 }
 
 
@@ -387,46 +435,84 @@ def retrieve_similar_scenarios(score, wickets, over, balls, target_runs, predict
 
 
 def build_historical_evidence(striker, bowler, venue, target_runs, predict_overs):
-    if not HAS_MAIN_DF or main_df.empty:
-        return []
-    df = main_df.copy()
-    df["venue_norm"] = df["venue"].astype(str).apply(normalize_venue_name)
-    df["batsman_norm"] = df["batsman"].astype(str).str.lower().str.strip()
-    df["bowler_norm"] = df["bowler"].astype(str).str.lower().str.strip()
-
-    future_col, supported_window = get_future_runs_column(predict_overs)
-    df["window_runs"] = pd.to_numeric(df[future_col], errors="coerce")
-    if int(max(round(float(predict_overs)), 1)) != supported_window:
-        df["window_runs"] = df["window_runs"] * (float(predict_overs) / supported_window)
-
-    venue_norm = normalize_venue_name(venue)
-    striker_norm = norm(resolve_name(striker, MAIN_BATSMAN_INDEX))
-    bowler_norm = norm(resolve_name(bowler, MAIN_BOWLER_INDEX))
-
-    def summarize(mask, label):
-        subset = df[mask].dropna(subset=["window_runs"])
-        total = len(subset)
-        if total == 0:
-            return None
-        success = int((subset["window_runs"] >= float(target_runs)).sum())
-        avg_runs = float(subset["window_runs"].mean())
-        return (
-            f"{success} out of {total} {label} reached {target_runs}+ runs in the next "
-            f"{predict_overs} overs. Average return in that window: {avg_runs:.1f} runs."
-        )
-
     evidence = []
-    for mask, label, priority in [
-        ((df["batsman_norm"] == striker_norm) & (df["venue_norm"] == venue_norm),
-         f"{striker} at {venue} situations", 1),
-        ((df["batsman_norm"] == striker_norm) & (df["bowler_norm"] == bowler_norm),
-         f"{striker} vs {bowler} situations", 0),
-        ((df["venue_norm"] == venue_norm),
-         f"{venue} situations", 2),
-    ]:
-        summary = summarize(mask, label)
-        if summary:
-            evidence.append((priority, summary))
+    striker_resolved = resolve_name(striker, PLAYER_NAME_INDEX or MAIN_BATSMAN_INDEX)
+    bowler_resolved = resolve_name(bowler, PLAYER_NAME_INDEX or MAIN_BOWLER_INDEX)
+    venue_norm = normalize_venue_name(venue)
 
-    evidence.sort(key=lambda item: item[0])
-    return [summary for _, summary in evidence]
+    if HAS_VS_STATS and not vs_stats.empty:
+        vs_df = vs_stats.copy()
+        vs_df["batsman_norm"] = vs_df["batsman"].astype(str).str.lower().str.strip()
+        vs_df["bowler_norm"] = vs_df["bowler"].astype(str).str.lower().str.strip()
+        exact = vs_df[
+            (vs_df["batsman_norm"] == norm(resolve_name(striker, VS_BATSMAN_INDEX))) &
+            (vs_df["bowler_norm"] == norm(resolve_name(bowler, VS_BOWLER_INDEX)))
+        ]
+        if not exact.empty:
+            row = exact.iloc[0]
+            evidence.append(
+                f"{striker_resolved} vs {bowler_resolved}: {int(_to_float(row.get('runs'), 0))} runs from "
+                f"{int(_to_float(row.get('balls'), 0))} balls at SR {float(row.get('strike_rate', 0)):.1f}, "
+                f"with {int(_to_float(row.get('dismissals'), 0))} dismissals."
+            )
+
+    if HAS_PLAYER_STATS and not player_stats.empty:
+        ps_df = player_stats.copy()
+        ps_df["player_norm"] = ps_df["player"].astype(str).str.lower().str.strip()
+
+        striker_row = ps_df[ps_df["player_norm"] == norm(striker_resolved)]
+        if not striker_row.empty:
+            row = striker_row.iloc[0]
+            evidence.append(
+                f"{striker_resolved} profile: overall SR {float(row.get('strike_rate', 0)):.1f}, "
+                f"powerplay SR {float(row.get('pp_sr', 0)):.1f}, middle-overs SR {float(row.get('middle_sr', 0)):.1f}, "
+                f"death-overs SR {float(row.get('death_sr', 0)):.1f}."
+            )
+
+        bowler_row = ps_df[ps_df["player_norm"] == norm(bowler_resolved)]
+        if not bowler_row.empty and float(bowler_row.iloc[0].get("balls_bowled", 0) or 0) > 0:
+            row = bowler_row.iloc[0]
+            evidence.append(
+                f"{bowler_resolved} bowling profile: economy {float(row.get('economy', 0)):.2f}, "
+                f"bowling SR {float(row.get('bowling_sr', 0)):.1f}, dot-ball rate {float(row.get('dot_bowl_pct', 0)) * 100:.1f}%."
+            )
+
+    if HAS_MAIN_DF and not main_df.empty:
+        df = main_df.copy()
+        df["venue_norm"] = df["venue"].astype(str).apply(normalize_venue_name)
+        df["batsman_norm"] = df["batsman"].astype(str).str.lower().str.strip()
+        df["bowler_norm"] = df["bowler"].astype(str).str.lower().str.strip()
+
+        future_col, supported_window = get_future_runs_column(predict_overs)
+        df["window_runs"] = pd.to_numeric(df[future_col], errors="coerce")
+        if int(max(round(float(predict_overs)), 1)) != supported_window:
+            df["window_runs"] = df["window_runs"] * (float(predict_overs) / supported_window)
+
+        striker_norm = norm(resolve_name(striker, MAIN_BATSMAN_INDEX))
+        bowler_norm = norm(resolve_name(bowler, MAIN_BOWLER_INDEX))
+
+        def summarize(mask, label):
+            subset = df[mask].dropna(subset=["window_runs"])
+            total = len(subset)
+            if total == 0:
+                return None
+            success = int((subset["window_runs"] >= float(target_runs)).sum())
+            avg_runs = float(subset["window_runs"].mean())
+            return (
+                f"{success} out of {total} {label} reached {target_runs}+ runs in the next "
+                f"{predict_overs} overs. Average return in that window: {avg_runs:.1f} runs."
+            )
+
+        for mask, label in [
+            ((df["batsman_norm"] == striker_norm) & (df["bowler_norm"] == bowler_norm),
+             f"{striker_resolved} vs {bowler_resolved} match states"),
+            ((df["batsman_norm"] == striker_norm) & (df["venue_norm"] == venue_norm),
+             f"{striker_resolved} at {venue} situations"),
+            ((df["venue_norm"] == venue_norm),
+             f"{venue} situations"),
+        ]:
+            summary = summarize(mask, label)
+            if summary:
+                evidence.append(summary)
+
+    return evidence[:4]

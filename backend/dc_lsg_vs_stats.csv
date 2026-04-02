@@ -1,0 +1,270 @@
+batsman,bowler,runs,balls,average,strike_rate,dismissals
+J Fraser-McGurk,Arshad Khan,10,8,10.0,125.0,1
+SD Hope,Arshad Khan,4,4,4.0,100.0,0
+Abishek Porel,Arshad Khan,19,8,19.0,237.5,0
+SD Hope,Mohsin Khan,5,9,5.0,55.55555555555556,0
+Abishek Porel,Mohsin Khan,8,3,8.0,266.66666666666663,0
+SD Hope,Yudhvir Singh,16,6,16.0,266.66666666666663,0
+Abishek Porel,Naveen-ul-Haq,16,8,16.0,200.0,1
+SD Hope,Ravi Bishnoi,14,9,14.0,155.55555555555557,1
+Abishek Porel,Ravi Bishnoi,20,17,20.0,117.64705882352942,0
+Abishek Porel,KH Pandya,5,3,5.0,166.66666666666669,0
+SD Hope,KH Pandya,7,7,7.0,100.0,0
+RR Pant,Ravi Bishnoi,37,31,37.0,119.35483870967742,1
+RR Pant,DJ Hooda,6,4,6.0,150.0,0
+Abishek Porel,DJ Hooda,2,3,2.0,66.66666666666666,0
+T Stubbs,Naveen-ul-Haq,27,12,27.0,225.0,0
+RR Pant,Naveen-ul-Haq,15,10,15.0,150.0,1
+T Stubbs,Ravi Bishnoi,10,7,10.0,142.85714285714286,0
+T Stubbs,KH Pandya,6,5,6.0,120.0,0
+RR Pant,KH Pandya,29,11,29.0,263.6363636363636,0
+T Stubbs,Mohsin Khan,9,5,9.0,180.0,0
+RR Pant,Mohsin Khan,3,8,3.0,37.5,1
+RR Pant,Arshad Khan,3,2,3.0,150.0,0
+T Stubbs,Arshad Khan,20,6,20.0,333.33333333333337,0
+AR Patel,Naveen-ul-Haq,2,2,2.0,100.0,0
+AR Patel,Mohsin Khan,6,5,6.0,120.0,0
+T Stubbs,Yudhvir Singh,5,2,5.0,250.0,0
+AR Patel,Yudhvir Singh,7,4,7.0,175.0,0
+Q de Kock,I Sharma,16,12,16.0,133.33333333333331,1
+KL Rahul,I Sharma,14,8,14.0,175.0,1
+MP Stoinis,I Sharma,1,2,1.0,50.0,0
+Q de Kock,KK Ahmed,15,11,15.0,136.36363636363635,1
+MP Stoinis,KK Ahmed,5,7,5.0,71.42857142857143,1
+DJ Hooda,I Sharma,2,5,1.0,40.0,2
+MP Stoinis,AR Patel,8,11,8.0,72.72727272727273,1
+N Pooran,AR Patel,20,5,20.0,400.0,0
+A Badoni,I Sharma,10,11,10.0,90.9090909090909,0
+N Pooran,I Sharma,1,2,1.0,50.0,0
+N Pooran,Mukesh Kumar,22,15,22.0,146.66666666666666,1
+A Badoni,Mukesh Kumar,43,25,43.0,172.0,1
+N Pooran,Kuldeep Yadav,34,23,34.0,147.82608695652172,1
+A Badoni,Kuldeep Yadav,13,14,13.0,92.85714285714286,1
+A Badoni,T Stubbs,2,3,2.0,66.66666666666666,1
+KH Pandya,T Stubbs,1,2,1.0,50.0,0
+N Pooran,T Stubbs,29,7,29.0,414.28571428571433,0
+N Pooran,Gulbadin Naib,11,5,11.0,220.00000000000003,0
+KH Pandya,Gulbadin Naib,1,1,1.0,100.0,0
+KH Pandya,Mukesh Kumar,12,13,12.0,92.3076923076923,1
+KH Pandya,Kuldeep Yadav,8,11,8.0,72.72727272727273,1
+Arshad Khan,Mukesh Kumar,6,9,6.0,66.66666666666666,0
+Arshad Khan,Kuldeep Yadav,18,13,18.0,138.46153846153845,0
+KH Pandya,I Sharma,2,2,2.0,100.0,0
+Arshad Khan,I Sharma,15,7,15.0,214.28571428571428,0
+Yudhvir Singh,Kuldeep Yadav,1,2,1.0,50.0,0
+Yudhvir Singh,Rasikh Salam,13,4,13.0,325.0,0
+Arshad Khan,Rasikh Salam,16,10,16.0,160.0,0
+Arshad Khan,KK Ahmed,22,10,22.0,220.00000000000003,0
+Yudhvir Singh,KK Ahmed,0,1,0.0,0.0,1
+Ravi Bishnoi,Rasikh Salam,1,1,1.0,100.0,0
+Ravi Bishnoi,Mukesh Kumar,1,1,1.0,100.0,0
+Naveen-ul-Haq,Mukesh Kumar,2,1,2.0,200.0,0
+Naveen-ul-Haq,Rasikh Salam,0,3,0.0,0.0,0
+KL Rahul,KK Ahmed,13,7,13.0,185.71428571428572,0
+KR Mayers,KK Ahmed,5,9,5.0,55.55555555555556,0
+KL Rahul,Mukesh Kumar,10,9,10.0,111.11111111111111,0
+KR Mayers,Mukesh Kumar,22,9,22.0,244.44444444444446,0
+KR Mayers,C Sakariya,4,3,4.0,133.33333333333331,0
+KL Rahul,C Sakariya,26,18,26.0,144.44444444444443,1
+DJ Hooda,Mukesh Kumar,4,5,4.0,80.0,0
+DJ Hooda,C Sakariya,9,9,9.0,100.0,0
+KR Mayers,AR Patel,25,10,25.0,250.0,1
+DJ Hooda,AR Patel,26,20,26.0,130.0,0
+DJ Hooda,Kuldeep Yadav,22,17,22.0,129.41176470588235,1
+KR Mayers,Kuldeep Yadav,17,7,17.0,242.85714285714283,0
+KH Pandya,AR Patel,4,5,4.0,80.0,0
+MP Stoinis,Kuldeep Yadav,11,10,11.0,110.00000000000001,1
+N Pooran,KK Ahmed,18,8,18.0,225.0,1
+N Pooran,C Sakariya,11,5,11.0,220.00000000000003,0
+KH Pandya,C Sakariya,8,4,8.0,200.0,0
+A Badoni,KK Ahmed,12,6,12.0,200.0,0
+A Badoni,C Sakariya,13,5,13.0,260.0,1
+K Gowtham,C Sakariya,6,1,6.0,600.0,0
+PP Shaw,KR Mayers,1,1,1.0,100.0,0
+DA Warner,KR Mayers,5,6,5.0,83.33333333333334,0
+DA Warner,JD Unadkat,24,10,24.0,240.0,0
+PP Shaw,JD Unadkat,5,2,5.0,250.0,0
+PP Shaw,K Gowtham,23,9,23.0,255.55555555555554,1
+DA Warner,K Gowtham,8,11,8.0,72.72727272727273,0
+PP Shaw,Avesh Khan,14,6,14.0,233.33333333333334,0
+DA Warner,Avesh Khan,7,10,7.0,70.0,1
+PP Shaw,MA Wood,0,4,0.0,0.0,1
+MR Marsh,MA Wood,0,1,0.0,0.0,1
+SN Khan,MA Wood,0,6,0.0,0.0,1
+SN Khan,Avesh Khan,17,9,17.0,188.88888888888889,0
+DA Warner,MA Wood,7,7,7.0,100.0,0
+DA Warner,Ravi Bishnoi,6,12,6.0,50.0,1
+RR Rossouw,Ravi Bishnoi,24,12,24.0,200.0,1
+RR Rossouw,K Gowtham,6,8,6.0,75.0,0
+R Powell,MA Wood,1,2,1.0,50.0,0
+R Powell,Ravi Bishnoi,3,11,1.5,27.27272727272727,2
+Aman Hakim Khan,Ravi Bishnoi,1,1,1.0,100.0,0
+Aman Hakim Khan,JD Unadkat,1,1,1.0,100.0,0
+Aman Hakim Khan,Avesh Khan,2,3,2.0,66.66666666666666,1
+AR Patel,Avesh Khan,17,14,17.0,121.42857142857142,0
+AR Patel,K Gowtham,2,2,2.0,100.0,0
+Kuldeep Yadav,K Gowtham,2,4,2.0,50.0,0
+Kuldeep Yadav,Avesh Khan,3,2,3.0,150.0,0
+AR Patel,JD Unadkat,2,2,2.0,100.0,0
+Kuldeep Yadav,JD Unadkat,1,5,1.0,20.0,0
+AR Patel,MA Wood,0,1,0.0,0.0,1
+C Sakariya,MA Wood,4,4,4.0,100.0,1
+Mukesh Kumar,MA Wood,0,1,0.0,0.0,0
+PP Shaw,JO Holder,14,10,14.0,140.0,0
+DA Warner,JO Holder,2,4,2.0,50.0,0
+PP Shaw,Ravi Bishnoi,5,8,5.0,62.5,1
+PP Shaw,AJ Tye,7,5,7.0,140.0,0
+DA Warner,AJ Tye,0,1,0.0,0.0,0
+PP Shaw,KH Pandya,15,9,15.0,166.66666666666669,0
+DA Warner,KH Pandya,1,2,1.0,50.0,0
+R Powell,K Gowtham,19,9,19.0,211.11111111111111,0
+RR Pant,K Gowtham,6,15,6.0,40.0,0
+SN Khan,Ravi Bishnoi,9,6,9.0,150.0,0
+SN Khan,KH Pandya,5,4,5.0,125.0,0
+SN Khan,AJ Tye,3,5,3.0,60.0,0
+RR Pant,AJ Tye,17,8,17.0,212.5,0
+RR Pant,Avesh Khan,6,6,6.0,100.0,0
+SN Khan,JO Holder,6,8,6.0,75.0,0
+RR Pant,JO Holder,13,11,13.0,118.18181818181819,0
+KL Rahul,Mustafizur Rahman,11,11,11.0,100.0,0
+Q de Kock,Mustafizur Rahman,8,13,8.0,61.53846153846154,0
+Q de Kock,Lalit Yadav,18,12,18.0,150.0,0
+KL Rahul,Lalit Yadav,13,7,13.0,185.71428571428572,0
+Q de Kock,SN Thakur,9,10,9.0,90.0,1
+KL Rahul,SN Thakur,28,18,28.0,155.55555555555557,1
+Q de Kock,A Nortje,31,12,31.0,258.33333333333337,0
+KL Rahul,AR Patel,17,26,17.0,65.38461538461539,0
+Q de Kock,AR Patel,9,6,9.0,150.0,0
+KL Rahul,Kuldeep Yadav,28,17,14.0,164.70588235294116,2
+Q de Kock,Kuldeep Yadav,16,10,16.0,160.0,1
+E Lewis,Kuldeep Yadav,3,5,3.0,60.0,0
+E Lewis,Lalit Yadav,2,8,2.0,25.0,1
+DJ Hooda,Lalit Yadav,4,3,4.0,133.33333333333331,0
+DJ Hooda,A Nortje,2,4,2.0,50.0,0
+DJ Hooda,Mustafizur Rahman,10,8,10.0,125.0,0
+KH Pandya,Mustafizur Rahman,21,15,21.0,140.0,0
+KH Pandya,SN Thakur,7,8,7.0,87.5,0
+DJ Hooda,SN Thakur,11,11,5.5,100.0,2
+A Badoni,SN Thakur,10,3,10.0,333.33333333333337,0
+AK Markram,MA Starc,21,15,21.0,140.0,0
+MR Marsh,MA Starc,24,10,24.0,240.0,0
+AK Markram,AR Patel,21,15,21.0,140.0,0
+MR Marsh,AR Patel,20,21,20.0,95.23809523809523,0
+AK Markram,V Nigam,9,5,9.0,180.0,1
+MR Marsh,V Nigam,18,7,18.0,257.14285714285717,0
+N Pooran,V Nigam,22,6,22.0,366.66666666666663,0
+MR Marsh,Mukesh Kumar,21,11,10.5,190.9090909090909,2
+MR Marsh,Kuldeep Yadav,16,12,16.0,133.33333333333331,0
+MR Marsh,MM Sharma,7,7,7.0,100.0,0
+N Pooran,MM Sharma,8,7,8.0,114.28571428571428,0
+RR Pant,Mukesh Kumar,0,4,0.0,0.0,1
+RR Pant,Kuldeep Yadav,0,4,0.0,0.0,1
+DA Miller,Kuldeep Yadav,9,11,9.0,81.81818181818183,0
+DA Miller,MA Starc,5,6,5.0,83.33333333333334,0
+N Pooran,MA Starc,5,4,2.5,125.0,2
+A Badoni,MA Starc,7,4,7.0,175.0,0
+A Badoni,AR Patel,11,10,11.0,110.00000000000001,0
+DA Miller,AR Patel,3,3,3.0,100.0,0
+SN Thakur,Kuldeep Yadav,0,2,0.0,0.0,1
+Shahbaz Ahmed,Kuldeep Yadav,1,2,1.0,50.0,0
+Shahbaz Ahmed,MM Sharma,3,3,3.0,100.0,0
+DA Miller,MM Sharma,20,11,20.0,181.8181818181818,0
+Shahbaz Ahmed,MA Starc,5,3,5.0,166.66666666666669,1
+Ravi Bishnoi,MA Starc,0,2,0.0,0.0,1
+J Fraser-McGurk,SN Thakur,1,2,1.0,50.0,1
+F du Plessis,SN Thakur,8,6,8.0,133.33333333333331,0
+Abishek Porel,SN Thakur,5,5,5.0,100.0,1
+Sameer Rizvi,SN Thakur,4,1,4.0,400.0,0
+F du Plessis,M Siddharth,9,6,9.0,150.0,0
+Sameer Rizvi,M Siddharth,0,3,0.0,0.0,1
+AR Patel,M Siddharth,8,3,8.0,266.66666666666663,0
+AR Patel,DS Rathi,17,10,17.0,170.0,1
+F du Plessis,DS Rathi,6,5,6.0,120.0,0
+AR Patel,SN Thakur,12,5,12.0,240.0,0
+T Stubbs,DS Rathi,3,3,3.0,100.0,0
+F du Plessis,Ravi Bishnoi,6,3,6.0,200.0,1
+Ashutosh Sharma,Ravi Bishnoi,22,9,22.0,244.44444444444446,0
+Ashutosh Sharma,DS Rathi,6,6,6.0,100.0,0
+T Stubbs,Prince Yadav,5,9,5.0,55.55555555555556,0
+Ashutosh Sharma,Prince Yadav,28,10,28.0,280.0,0
+T Stubbs,M Siddharth,18,7,18.0,257.14285714285717,1
+Ashutosh Sharma,M Siddharth,2,3,2.0,66.66666666666666,0
+V Nigam,M Siddharth,2,2,2.0,100.0,0
+V Nigam,Ravi Bishnoi,16,5,16.0,320.0,0
+V Nigam,Shahbaz Ahmed,12,5,12.0,240.0,0
+Ashutosh Sharma,Shahbaz Ahmed,8,3,8.0,266.66666666666663,0
+V Nigam,Prince Yadav,9,3,9.0,300.0,0
+V Nigam,DS Rathi,0,1,0.0,0.0,1
+MA Starc,DS Rathi,2,4,2.0,50.0,0
+MA Starc,Ravi Bishnoi,0,1,0.0,0.0,1
+Kuldeep Yadav,Ravi Bishnoi,1,2,1.0,50.0,0
+Kuldeep Yadav,Prince Yadav,4,3,4.0,133.33333333333331,1
+MM Sharma,Shahbaz Ahmed,1,2,1.0,50.0,0
+AK Markram,Mukesh Kumar,11,5,11.0,220.00000000000003,0
+MR Marsh,PVD Chameera,27,14,27.0,192.85714285714286,0
+AK Markram,PVD Chameera,5,6,5.0,83.33333333333334,1
+Abdul Samad,MA Starc,0,4,0.0,0.0,0
+Abdul Samad,Kuldeep Yadav,2,2,2.0,100.0,0
+Abdul Samad,Mukesh Kumar,0,2,0.0,0.0,1
+DA Miller,Mukesh Kumar,3,3,3.0,100.0,0
+DA Miller,PVD Chameera,1,2,1.0,50.0,0
+A Badoni,PVD Chameera,8,4,8.0,200.0,0
+KK Nair,SN Thakur,8,4,8.0,200.0,0
+KK Nair,DS Rathi,1,3,1.0,33.33333333333333,0
+Abishek Porel,DS Rathi,10,9,10.0,111.11111111111111,0
+Abishek Porel,Prince Yadav,8,7,8.0,114.28571428571428,0
+Abishek Porel,AK Markram,11,8,11.0,137.5,1
+KK Nair,AK Markram,6,4,6.0,150.0,1
+KL Rahul,AK Markram,12,6,12.0,200.0,0
+KL Rahul,Prince Yadav,13,8,13.0,162.5,0
+KL Rahul,Avesh Khan,8,9,8.0,88.88888888888889,0
+Abishek Porel,Avesh Khan,5,2,5.0,250.0,0
+KL Rahul,DS Rathi,5,8,5.0,62.5,0
+KL Rahul,Ravi Bishnoi,12,8,12.0,150.0,0
+AR Patel,AK Markram,0,1,0.0,0.0,0
+AR Patel,Ravi Bishnoi,23,9,23.0,255.55555555555554,0
+AR Patel,Prince Yadav,2,2,2.0,100.0,0
+D Padikkal,KK Ahmed,0,4,0.0,0.0,1
+D Padikkal,I Sharma,3,5,3.0,60.0,0
+MP Stoinis,Mukesh Kumar,1,1,1.0,100.0,0
+Arshad Khan,AR Patel,1,2,1.0,50.0,0
+PP Shaw,Arshad Khan,12,9,12.0,133.33333333333331,0
+DA Warner,Arshad Khan,6,5,6.0,120.0,0
+PP Shaw,Naveen-ul-Haq,9,5,9.0,180.0,0
+DA Warner,Naveen-ul-Haq,0,1,0.0,0.0,0
+DA Warner,Yash Thakur,2,3,2.0,66.66666666666666,1
+J Fraser-McGurk,Yash Thakur,15,11,15.0,136.36363636363635,0
+J Fraser-McGurk,KH Pandya,19,10,19.0,190.0,0
+J Fraser-McGurk,Ravi Bishnoi,5,6,5.0,83.33333333333334,0
+J Fraser-McGurk,Naveen-ul-Haq,5,5,5.0,100.0,1
+RR Pant,Yash Thakur,8,4,8.0,200.0,0
+RR Pant,MP Stoinis,9,4,9.0,225.0,0
+J Fraser-McGurk,MP Stoinis,1,2,1.0,50.0,0
+SD Hope,Yash Thakur,3,4,3.0,75.0,0
+T Stubbs,Yash Thakur,3,2,3.0,150.0,0
+Q de Kock,C Sakariya,12,4,12.0,300.0,0
+MP Stoinis,SN Thakur,5,5,5.0,100.0,0
+MP Stoinis,C Sakariya,2,4,2.0,50.0,0
+MP Stoinis,Mustafizur Rahman,9,5,9.0,180.0,0
+PP Shaw,Mohsin Khan,1,5,1.0,20.0,0
+DA Warner,Mohsin Khan,3,4,3.0,75.0,1
+PP Shaw,PVD Chameera,4,2,4.0,200.0,1
+MR Marsh,Mohsin Khan,1,3,1.0,33.33333333333333,0
+MR Marsh,KH Pandya,1,1,1.0,100.0,0
+MR Marsh,JO Holder,13,4,13.0,325.0,0
+RR Pant,PVD Chameera,5,2,5.0,250.0,0
+MR Marsh,Ravi Bishnoi,6,3,6.0,200.0,0
+MR Marsh,K Gowtham,0,1,0.0,0.0,1
+Lalit Yadav,K Gowtham,2,2,2.0,100.0,0
+Lalit Yadav,Ravi Bishnoi,1,2,1.0,50.0,1
+R Powell,JO Holder,9,5,9.0,180.0,0
+R Powell,Mohsin Khan,5,3,5.0,166.66666666666669,1
+R Powell,PVD Chameera,2,4,2.0,50.0,0
+AR Patel,PVD Chameera,11,5,11.0,220.00000000000003,0
+AR Patel,JO Holder,13,9,13.0,144.44444444444443,0
+SN Thakur,Mohsin Khan,1,2,1.0,50.0,1
+Kuldeep Yadav,Mohsin Khan,2,2,2.0,100.0,0
+Kuldeep Yadav,JO Holder,1,1,1.0,100.0,0
+Kuldeep Yadav,PVD Chameera,6,3,6.0,200.0,0
+Kuldeep Yadav,MP Stoinis,7,3,7.0,233.33333333333334,0
+AR Patel,MP Stoinis,6,4,6.0,150.0,0
